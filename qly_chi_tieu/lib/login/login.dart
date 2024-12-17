@@ -17,9 +17,15 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center, // Căn giữa theo chiều dọc
           crossAxisAlignment: CrossAxisAlignment.center, // Căn giữa theo chiều ngang
           children: [
+            // Logo ứng dụng
+            Image.asset(
+              'assets/images/logo.png',
+              height: 250,
+            ),
+            const SizedBox(height: 0),
             // Tiêu đề chào mừng người dùng
-            const Text(
-              'Chào mừng bạn đã đến với',
+            Text(
+              'Welcome to FINIKAA',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -28,7 +34,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 10),
             // Mô tả ngắn về màn hình đăng nhập
             Text(
-              'Ứng dụng quản lý chi tiêu cá nhân',
+              'Đăng nhập để tiếp tục sử dụng ứng dụng',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -41,8 +47,13 @@ class LoginScreen extends StatelessWidget {
               controller: emailController, // Controller để điều khiển TextField
               decoration: const InputDecoration(
                 labelText: 'Email', // Chú thích cho trường nhập liệu
-                border: OutlineInputBorder(), // Viền cho TextField
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ), // Viền cho TextField
                 prefixIcon: Icon(Icons.email), // Biểu tượng Email
+                
               ),
             ),
             const SizedBox(height: 16),
@@ -52,7 +63,11 @@ class LoginScreen extends StatelessWidget {
               obscureText: true, // Ẩn mật khẩu khi gõ
               decoration: InputDecoration(
                 labelText: 'Mật khẩu', // Chú thích cho trường mật khẩu
-                border: const OutlineInputBorder(),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),  
+                ),
                 prefixIcon: const Icon(Icons.lock), // Biểu tượng khóa
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.visibility), // Biểu tượng hiện thị mật khẩu
@@ -76,14 +91,18 @@ class LoginScreen extends StatelessWidget {
                 // Xử lý đăng nhập tại đây
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, // Màu nền của nút
+                backgroundColor: const Color.fromARGB(255, 255, 149, 0), // Màu nền của nút
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
                 textStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  //màu chữ
+                  color: Color.fromARGB(255, 249, 249, 249),
+                  
                 ),
               ),
               child: const Text('Đăng Nhập'),
+
             ),
             const SizedBox(height: 20),
             // Đoạn văn bản "Hoặc tiếp tục với"
