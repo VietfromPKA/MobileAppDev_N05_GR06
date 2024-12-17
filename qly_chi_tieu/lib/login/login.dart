@@ -34,14 +34,14 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 10),
             // Mô tả ngắn về màn hình đăng nhập
             Text(
-              'Đăng nhập để tiếp tục sử dụng ứng dụng',
+              'Đăng nhập để tiếp tục sử dụng FINIKAA',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 28),
             // TextField nhập Email
             TextField(
               controller: emailController, // Controller để điều khiển TextField
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             // Nút "Quên Mật Khẩu?"
             Align(
               alignment: Alignment.centerRight,
@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                 child: const Text('Quên Mật Khẩu?'),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             // Nút đăng nhập
             ElevatedButton(
               onPressed: () {
@@ -142,7 +142,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             // Nút để người dùng đăng ký nếu chưa có tài khoản
             TextButton(
               onPressed: () {},
