@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
-import 'sign_in.dart'; // Import màn hình đăng ký
-import 'forgot_pass.dart'; // Import màn hình quên mật khẩu
 
-class LoginScreen extends StatelessWidget {
+class SignInScreen extends StatelessWidget {
+  // Các controller để điều khiển các TextField
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
-  LoginScreen({super.key});
+  SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Tự động thay đổi kích thước khi bàn phím xuất hiện
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag, // Ẩn bàn phím khi kéo
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Logo ứng dụng
               Image.asset(
                 'assets/images/logo.png',
-                height: 250,
+                height: 200,
               ),
-              const SizedBox(height: 0),
+              const SizedBox(height: 10),
+              // Tiêu đề chào mừng người dùng
               const Text(
-                'Welcome to FINIKAA',
+                'Đăng ký tài khoản',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 10),
+              // Mô tả ngắn về màn hình đăng ký
               Text(
-                'Đăng nhập để tiếp tục sử dụng FINIKAA',
+                'Tạo tài khoản mới để sử dụng FINIKAA',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -43,6 +46,21 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 28),
+              // TextField nhập Tên
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Tên của bạn',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                  ),
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+              const SizedBox(height: 16),
+              // TextField nhập Email
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
@@ -56,40 +74,40 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+              // TextField nhập mật khẩu
               TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Mật khẩu',
-                  border: const OutlineInputBorder(
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(12),
                     ),
                   ),
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.visibility),
-                    onPressed: () {},
+                  prefixIcon: Icon(Icons.lock),
+                ),
+              ),
+              const SizedBox(height: 16),
+              // TextField xác nhận mật khẩu
+              TextField(
+                controller: confirmPasswordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Xác nhận mật khẩu',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
                   ),
+                  prefixIcon: Icon(Icons.lock_outline),
                 ),
               ),
-              const SizedBox(height: 10),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ForgotPasswordScreen()),
-                    );
-                  },
-                  child: const Text('Quên Mật Khẩu?'),
-                ),
-              ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 28),
+              // Nút đăng ký
               ElevatedButton(
                 onPressed: () {
-                  // Xử lý đăng nhập tại đây
+                  // Xử lý đăng ký tại đây
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 149, 0),
@@ -97,22 +115,19 @@ class LoginScreen extends StatelessWidget {
                   textStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                   ),
                 ),
-                child: const Text('Đăng Nhập'),
+                child: const Text('Đăng Ký'),
               ),
               const SizedBox(height: 20),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Hoặc tiếp tục với'),
-                ],
-              ),
+              // Đoạn văn bản "Hoặc tiếp tục với"
+              const Text('Hoặc tiếp tục với'),
               const SizedBox(height: 10),
+              // Nút đăng nhập với các dịch vụ bên ngoài
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Nút đăng ký với Google
                   ElevatedButton.icon(
                     onPressed: () {},
                     icon: Image.asset('assets/images/google.png', height: 20),
@@ -124,6 +139,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 20),
+                  // Nút đăng ký với Facebook
                   ElevatedButton.icon(
                     onPressed: () {},
                     icon: Image.asset('assets/images/facebook.png', height: 20),
@@ -136,15 +152,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
+              // Nút chuyển sang màn hình đăng nhập
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignInScreen()),
-                  );
+                  Navigator.pop(context); // Quay lại màn hình đăng nhập
                 },
-                child: const Text('Không có tài khoản? Đăng ký ngay'),
+                child: const Text('Đã có tài khoản? Đăng nhập ngay'),
               ),
             ],
           ),
