@@ -90,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text(
                     '$_counter', // Hiển thị số lần đếm
+                    // hiện thị màu nút tăng giảm theo màu đã chọn
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium, // Định dạng kiểu chữ
@@ -130,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 spacing: 16.0, // Khoảng cách ngang giữa các mục
                 runSpacing: 8.0, // Khoảng cách dọc giữa các mục khi xuống dòng
                 alignment:
-                    WrapAlignment.center, // Căn giữa các mục trong giao diện
+                    WrapAlignment.end, // Căn giữa các mục trong giao diện
                 children: _colors.entries.map((entry) {
                   return GestureDetector(
                     onTap: () {
