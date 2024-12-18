@@ -10,12 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Personal Financial Management',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pinkAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Personal Financial Management'),
     );
   }
 }
@@ -31,12 +31,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  double _num1 = 0;
-  double _num2 = 0;
-  double _result = 0;
+  String _name = "Duong Nguyen";
 
-  final TextEditingController _num1Controller = TextEditingController();
-  final TextEditingController _num2Controller = TextEditingController();
+  static const Map<String, Color> _colors = <String, Color>{
+    'Red': Colors.red,
+    'Green': Colors.green,
+    'Blue': Colors.blue,
+    'Cyan': Colors.cyan,
+    'Yellow': Colors.yellow,
+    'Black': Colors.black,
+    'White': Colors.white,
+  };
 
   void _incrementCounter() {
     setState(() {
@@ -47,28 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void _decrementCounter() {
     setState(() {
       _counter--;
-    });
-  }
-
-  void _calculate(String operation) {
-    setState(() {
-      double num1 = double.tryParse(_num1Controller.text) ?? 0;
-      double num2 = double.tryParse(_num2Controller.text) ?? 0;
-
-      switch (operation) {
-        case '+':
-          _result = num1 + num2;
-          break;
-        case '-':
-          _result = num1 - num2;
-          break;
-        case '*':
-          _result = num1 * num2;
-          break;
-        case '/':
-          _result = num2 != 0 ? num1 / num2 : double.infinity;
-          break;
-      }
     });
   }
 
@@ -83,76 +66,32 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: _num1Controller,
-              decoration: const InputDecoration(
-                labelText: 'Number 1',
+            Text('$_name'),
+            for (final MapEntry<String, Color> entry in _colors.entries)
+              Container(
+                color: entry.value,
+                width: 100.0,
+                height: 100.0,
+                alignment: Alignment.center,
+                child: Text(entry.key),
               ),
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: _num2Controller,
-              decoration: const InputDecoration(
-                labelText: 'Number 2',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FloatingActionButton(
-                  onPressed: () => _calculate('+'),
-                  tooltip: 'Add',
-                  child: const Icon(Icons.add),
-                ),
-                const SizedBox(width: 10),
-                FloatingActionButton(
-                  onPressed: () => _calculate('-'),
-                  tooltip: 'Subtract',
-                  child: const Icon(Icons.remove),
-                ),
-                const SizedBox(width: 10),
-                FloatingActionButton(
-                  onPressed: () => _calculate('*'),
-                  tooltip: 'Multiply',
-                  child: const Icon(Icons.close),
-                ),
-                const SizedBox(width: 10),
-                FloatingActionButton(
-                  onPressed: () => _calculate('/'),
-                  tooltip: 'Divide',
-                  child: const Icon(Icons.horizontal_split),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Result: $_result',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
           ],
         ),
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
+        children: [
           FloatingActionButton(
             onPressed: _incrementCounter,
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 16),
           FloatingActionButton(
             onPressed: _decrementCounter,
             tooltip: 'Decrement',
