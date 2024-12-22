@@ -10,95 +10,113 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Personal Financial Management',
+      title: 'Personal Financal Management',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pinkAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 15, 230, 33)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Personal Financial Management'),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _name = "Duong Nguyen";
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  Color _themeColor = Colors.blueAccent;
+
+  static const List<Map<String, dynamic>> _operations = [
+    {'operation': '2 + 2', 'result': 2 + 2},
+    {'operation': '3 * 3', 'result': 3 * 3},
+    {'operation': '10 - 4', 'result': 10 - 4},
+    {'operation': '16 / 2', 'result': 16 / 2},
+  ];
 
   static const Map<String, Color> _colors = <String, Color>{
-    'Red': Colors.red,
-    'Green': Colors.green,
-    'Blue': Colors.blue,
-    'Cyan': Colors.cyan,
-    'Yellow': Colors.yellow,
     'Black': Colors.black,
     'White': Colors.white,
   };
 
-  void _incrementCounter() {
+  void _onItemTapped(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
   }
 
-  void _decrementCounter() {
+  void _updateThemeColor(Color color) {
     setState(() {
-      _counter--;
+      _themeColor = color;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: _themeColor),
+        useMaterial3: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Personal Financal Management'),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        ),
+        body: Center(
+          child: _selectedIndex == 0 ? _buildColorsPage() : _buildOperationsPage(),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.color_lens),
+              label: 'Colors',
             ),
-            Text('$_name'),
-            for (final MapEntry<String, Color> entry in _colors.entries)
-              Container(
-                color: entry.value,
-                width: 100.0,
-                height: 100.0,
-                alignment: Alignment.center,
-                child: Text(entry.key),
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calculate),
+              label: 'Operations',
+            ),
           ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color.fromARGB(255, 60, 214, 22),
+          onTap: _onItemTapped,
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _buildColorsPage() {
+    return ListView(
+      children: _colors.entries.map((entry) {
+        return ListTile(
+          leading: Container(
+            width: 24,
+            height: 24,
+            color: entry.value,
           ),
-          const SizedBox(height: 16),
-          FloatingActionButton(
-            onPressed: _decrementCounter,
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
-          ),
-        ],
-      ),
+          title: Text(entry.key),
+          onTap: () {
+            _updateThemeColor(entry.value);
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildOperationsPage() {
+    return ListView.builder(
+      itemCount: _operations.length,
+      itemBuilder: (context, index) {
+        final operation = _operations[index];
+        return ListTile(
+          title: Text(operation['operation']),
+          trailing: Text(operation['result'].toString()),
+        );
+      },
     );
   }
 }
