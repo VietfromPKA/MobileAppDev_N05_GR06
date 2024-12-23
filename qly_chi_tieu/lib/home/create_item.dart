@@ -1,52 +1,45 @@
 import 'package:flutter/material.dart';
 
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const NewCategoryScreen(),
-    );
-  }
-}
-
-class NewCategoryScreen extends StatelessWidget {
+class NewCategoryScreen extends StatefulWidget {
   const NewCategoryScreen({super.key});
 
   @override
+  State<NewCategoryScreen> createState() => _NewCategoryScreenState();
+}
+
+class _NewCategoryScreenState extends State<NewCategoryScreen> {
+  final List<IconData> icons = [
+    Icons.shopping_cart,
+    Icons.directions_car,
+    Icons.flight,
+    Icons.fastfood,
+    Icons.cake,
+    Icons.icecream,
+    Icons.ramen_dining,
+    Icons.local_pizza,
+    Icons.directions_boat,
+    Icons.sports_basketball,
+    Icons.movie,
+    Icons.coffee,
+    Icons.star,
+    Icons.desk,
+    Icons.wine_bar,
+    Icons.directions_bike,
+  ];
+
+  String categoryName = '';
+  IconData? selectedIcon;
+
+  @override
   Widget build(BuildContext context) {
-    // Danh sách các icon
-    final List<IconData> icons = [
-      Icons.shopping_cart,
-      Icons.directions_car,
-      Icons.flight,
-      Icons.fastfood,
-      Icons.cake,
-      Icons.icecream,
-      Icons.ramen_dining,
-      Icons.local_pizza,
-      Icons.directions_boat,
-      Icons.sports_basketball,
-      Icons.movie,
-      Icons.coffee,
-      Icons.star,
-      Icons.desk,
-      Icons.wine_bar,
-      Icons.directions_bike,
-    ];
-
-    // Màu mặc định
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tạo mới'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Padding(
@@ -54,34 +47,55 @@ class NewCategoryScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              style: const TextStyle(color: Colors.white),
+              onChanged: (value) {
+                setState(() {
+                  categoryName = value;
+                });
+              },
+              decoration: const InputDecoration(
                 labelText: 'Tên',
+                labelStyle: TextStyle(color: Colors.white),
                 hintText: 'Vui lòng nhập vào tên đề mục',
+                hintStyle: TextStyle(color: Colors.white),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             const Text(
               'Biểu tượng',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 8),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
                 ),
                 itemCount: icons.length,
                 itemBuilder: (context, index) {
-                  return IconButton(
-                    onPressed: () {
-                      // Xử lý sự kiện khi chọn icon
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIcon = icons[index];
+                      });
                     },
-                    icon: Icon(
-                      icons[index],
-                      color: Colors.orange, // Mặc định màu xám
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(207, 33, 33, 33),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        icons[index],
+                        color: selectedIcon == icons[index]
+                            ? Colors.orange
+                            : Colors.grey,
+                        size: 30,
+                      ),
                     ),
                   );
                 },
@@ -91,7 +105,15 @@ class NewCategoryScreen extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Xử lý sự kiện khi lưu với màu mặc định
+                  if (categoryName.isNotEmpty && selectedIcon != null) {
+                    Navigator.pop(
+                        context, {'name': categoryName, 'icon': selectedIcon});
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Vui lòng nhập đủ thông tin!')),
+                    );
+                  }
                 },
                 child: const Text('Lưu'),
               ),
@@ -99,6 +121,7 @@ class NewCategoryScreen extends StatelessWidget {
           ],
         ),
       ),
+      backgroundColor: const Color(0xFF121212),
     );
   }
 }
