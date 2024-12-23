@@ -155,7 +155,7 @@ class _InputScreenState extends State<InputScreen> {
             const SizedBox(height: 16),
             // Phần nhập số tiền (Khoản chi hoặc Khoản thu)
             TextField(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: selectedType == 'Chi'
@@ -165,7 +165,7 @@ class _InputScreenState extends State<InputScreen> {
                 border: const OutlineInputBorder(),
                 hintText: '0',
                 suffixText: '₫',
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
               ),
             ),
             const SizedBox(height: 16),
