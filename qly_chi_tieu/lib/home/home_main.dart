@@ -26,26 +26,9 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Tắt banner debug
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Expanded(
-                child: Align(
-                  alignment: Alignment.center, // Căn giữa logo trong AppBar
-                  child: Image.asset(
-                    'images/logo.png', // Đường dẫn tới logo trong thư mục assets
-                    height: 50, // Chiều cao của logo
-                  ),
-                ),
-              ),
-              // Tiêu đề ứng dụng mặc định sẽ nằm ở bên trái
-            ],
-          ),
-          backgroundColor: const Color.fromARGB(50, 255, 149, 0),
-        ),
-        body: _screens[_currentIndex],
+        body: _screens[_currentIndex], // Sử dụng từng màn hình riêng
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
@@ -54,18 +37,17 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color.fromARGB(255, 255, 149, 0),
+          selectedItemColor: Colors.teal,
           unselectedItemColor: Colors.grey,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.edit), label: 'Nhập'),
-            BottomNavigationBarItem(icon: Icon(Icons.event), label: 'Lịch'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.bar_chart), label: 'Báo cáo'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Khác'),
+            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'Lịch'),
+            BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
+            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'Khác'),
           ],
         ),
       ),
+      theme: ThemeData(primarySwatch: Colors.teal),
     );
   }
 }

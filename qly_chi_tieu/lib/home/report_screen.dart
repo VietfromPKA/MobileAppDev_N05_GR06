@@ -5,10 +5,16 @@ class ReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Màn hình Báo cáo',
-        style: TextStyle(fontSize: 18),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Báo cáo'),
+        backgroundColor: Colors.blue,
+      ),
+      body: const Center(
+        child: Text(
+          'Màn hình Báo cáo',
+          style: TextStyle(fontSize: 18),
+        ),
       ),
     );
   }

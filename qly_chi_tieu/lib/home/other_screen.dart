@@ -5,10 +5,16 @@ class OtherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Màn hình Khác',
-        style: TextStyle(fontSize: 18),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Khác'),
+        backgroundColor: Colors.purple,
+      ),
+      body: const Center(
+        child: Text(
+          'Màn hình Khác',
+          style: TextStyle(fontSize: 18),
+        ),
       ),
     );
   }

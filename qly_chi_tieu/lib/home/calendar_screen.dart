@@ -5,10 +5,16 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Màn hình Lịch',
-        style: TextStyle(fontSize: 18),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Lịch'),
+        backgroundColor: Colors.orange,
+      ),
+      body: const Center(
+        child: Text(
+          'Màn hình Lịch',
+          style: TextStyle(fontSize: 18),
+        ),
       ),
     );
   }
