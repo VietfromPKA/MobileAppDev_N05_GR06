@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -43,7 +40,6 @@ class NewCategoryScreen extends StatelessWidget {
     ];
 
     // Màu mặc định
-    final Color defaultColor = Colors.orange;
 
     return Scaffold(
       appBar: AppBar(
@@ -96,7 +92,6 @@ class NewCategoryScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Xử lý sự kiện khi lưu với màu mặc định
-                  print('Lưu với màu: $defaultColor');
                 },
                 child: const Text('Lưu'),
               ),
