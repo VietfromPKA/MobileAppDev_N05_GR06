@@ -1,126 +1,97 @@
 import 'package:flutter/material.dart';
 
+// Hàm main: Điểm khởi đầu của ứng dụng
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+// Widget gốc của ứng dụng
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Personal Financial Management',
+      // Tiêu đề của ứng dụng
+      title: 'Flutter Layout Demo',
+      // Định nghĩa chủ đề giao diện
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(
-          title: 'Personal Financial Management Demo Home Page'),
+      // Widget chính khi ứng dụng khởi chạy
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  Color _backgroundColor = Colors.white; // tạo màu nền
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _changeBackgroundColor(Color color) {
-    //thay màu nền
-    setState(() {
-      _backgroundColor = color;
-    });
-  }
-
-  void _resetBackgroundColor() {
-    //reset lại màu nền
-    setState(() {
-      _backgroundColor = Colors.white;
-    });
-  }
-
+// Widget màn hình chính
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Thanh AppBar hiển thị tiêu đề
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text('Danh sách màu'),
       ),
-      body: Container(
-        color: _backgroundColor,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
+      // Phần nội dung chính
+      body: Column(
+        children: [
+          // Phần tiêu đề với khoảng cách
+          Padding(
+            padding: const EdgeInsets.all(16.0), // Khoảng cách 16 đơn vị
+            child: Text(
+              'Welcome to Flutter!',
+              style: TextStyle(
+                fontSize: 24, // Cỡ chữ 24
+                fontWeight: FontWeight.bold, // In đậm
               ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 20),
-              Wrap(
-                spacing: 10,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => _changeBackgroundColor(Colors.red),
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                    child: const Text('Red'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _changeBackgroundColor(Colors.green),
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                    child: const Text('Green'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _changeBackgroundColor(Colors.blue),
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                    child: const Text('Blue'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _changeBackgroundColor(Colors.yellow),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow),
-                    child: const Text('Yellow'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _resetBackgroundColor,
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                child: const Text('Reset'),
-              ),
-            ],
+            ),
           ),
-        ),
+          // Đường kẻ ngang phân cách
+          Divider(),
+          // Danh sách các mục
+          Expanded(
+            child: ListView.builder(
+              // Tổng số mục trong danh sách
+              itemCount: 12,
+              // Hàm xây dựng từng mục trong danh sách
+              itemBuilder: (context, index) {
+                // Màu nền được chọn dựa trên chỉ số
+                final backgroundColor =
+                    Colors.primaries[index % Colors.primaries.length].shade300;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 4.0), // Tạo lề xung quanh
+                  child: Container(
+                    height: 50,
+                    color: backgroundColor, // Màu nền
+                    child: ListTile(
+                      leading: Icon(Icons.star,
+                          size: 20), // Biểu tượng bên trái// Thu nhỏ biểu tượng
+                      title: Text(
+                        'Mục ${index + 1}', // Tiêu đề
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold /*In đậm */,
+                            fontSize: 14), // Giảm kích thước chữ
+                      ),
+                      subtitle: Text(
+                        'Chọn mục ${index + 1}',
+                        style: TextStyle(fontSize: 12),
+                      ), // Giảm kích thước chữ phụ),  // Phụ đề
+                      trailing: Icon(Icons.arrow_forward,
+                          size: 20), // Biểu tượng bên phải
+                      onTap: () {
+                        // Khi người dùng nhấn vào mục
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Đã chọn mục: ${index + 1}')),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

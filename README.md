@@ -17,8 +17,8 @@ Dự án được thực hiện bởi nhóm gồm 3 thành viên với sự hư�
 
 ## 📂 Nội dung chính  
 
-Dưới đây là sơ đồ UML của dự án:
-![Sơ đồ UML](./UML.drawio.png)
+Class Diagram
+![Class Diagram](./UML.drawio.png)
 
 Demo sơ đồ Use-case:
-![Sơ đồ UC](./Use-Case.drawio.png)
+![Sơ đồ UC](./UC.drawio.png)
