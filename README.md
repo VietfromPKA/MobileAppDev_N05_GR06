@@ -16,3 +16,9 @@ Dự án được thực hiện bởi nhóm gồm 3 thành viên với sự hư�
 - **Nguyễn Văn Dương** - 22010019  
 
 ## 📂 Nội dung chính  
+
+Class Diagram
+![Class Diagram](./UML.drawio.png)
+
+Demo sơ đồ Use-case:
+![Sơ đồ UC](./UC.drawio.png)
