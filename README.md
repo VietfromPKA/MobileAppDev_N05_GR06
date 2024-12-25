@@ -21,4 +21,4 @@ Dưới đây là sơ đồ UML của dự án:
 ![Sơ đồ UML](./UML.drawio.png)
 
 Demo sơ đồ Use-case:
-![Sơ đồ UML](./Use-Case.drawio.png)
+![Sơ đồ UC](./Use-Case.drawio.png)
