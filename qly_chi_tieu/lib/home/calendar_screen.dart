@@ -22,27 +22,50 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
       {'category': 'Ăn uống', 'detail': 'Tiệc tất niên', 'amount': '-200,000đ'},
     ],
     "2024-12-23": [
-      {'category': 'Mua sắm', 'detail': 'Mua quà Giáng Sinh', 'amount': '-500,000đ'},
+      {
+        'category': 'Mua sắm',
+        'detail': 'Mua quà Giáng Sinh',
+        'amount': '-500,000đ'
+      },
+      {'category': 'Mua sắm', 'detail': 'Mua quà tết', 'amount': '-1500,000đ'},
     ],
     "2024-12-24": [
-      {'category': 'Mua sắm', 'detail': 'Mua quà Giáng Sinh', 'amount': '-500,000đ'},
+      {
+        'category': 'Mua sắm',
+        'detail': 'Mua quà Giáng Sinh',
+        'amount': '-500,000đ'
+      },
     ],
     "2024-12-25": [
-      {'category': 'Mua sắm', 'detail': 'Mua quà Giáng Sinh', 'amount': '-500,000đ'},
+      {
+        'category': 'Mua sắm',
+        'detail': 'Mua quà Giáng Sinh',
+        'amount': '-500,000đ'
+      },
     ],
     "2024-12-26": [
-      {'category': 'Mua sắm', 'detail': 'Mua quà Giáng Sinh', 'amount': '-500,000đ'},
+      {
+        'category': 'Mua sắm',
+        'detail': 'Mua quà Giáng Sinh',
+        'amount': '-500,000đ'
+      },
     ],
     "2024-12-27": [
-      {'category': 'Mua sắm', 'detail': 'Mua quà Giáng Sinh', 'amount': '-500,000đ'},
+      {
+        'category': 'Tiền Lương',
+        'detail': 'Lương công ty XYZ',
+        'amount': '500,000đ'
+      },
     ],
   };
 
+  /// Lấy danh sách các ngày trong tháng
   List<int> _daysInMonth(DateTime date) {
     final lastDay = DateTime(date.year, date.month + 1, 0);
     return List.generate(lastDay.day, (index) => index + 1);
   }
 
+  /// Thay đổi tháng hiển thị
   void _changeMonth(int offset) {
     setState(() {
       displayedMonth =
@@ -50,6 +73,7 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
     });
   }
 
+  /// Chọn ngày trong lịch
   void onDaySelected(int day) {
     setState(() {
       selectedDate = DateTime(displayedMonth.year, displayedMonth.month, day);
@@ -112,151 +136,255 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
       }
     }
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Lịch Thu Chi Cá Nhân'),
-        titleTextStyle: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-        backgroundColor: Colors.deepOrangeAccent,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(50.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_left, color: Colors.white),
-                  onPressed: () => _changeMonth(-1),
-                ),
-                Text(
-                  "${displayedMonth.month}/${displayedMonth.year}",
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.arrow_right, color: Colors.white),
-                  onPressed: () => _changeMonth(1),
-                ),
-              ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(75.0), // giảm chiều cao của AppBar
+        child: AppBar(
+          centerTitle: true,
+          title: const Text('Lịch Thu Chi Cá Nhân'),
+          titleTextStyle: const TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          backgroundColor: Colors.deepOrangeAccent,
+          bottom: PreferredSize(
+            preferredSize:
+                const Size.fromHeight(30.0), // chiều cao của container
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment
+                    .spaceBetween, // căn giữa 2 phía của container
+                mainAxisSize: MainAxisSize
+                    .min, // chiều rộng của container bằng với nội dung
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_left, color: Colors.white),
+                    onPressed: () => _changeMonth(-1),
+                  ),
+                  Text(
+                    "${displayedMonth.month}/${displayedMonth.year}",
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_right, color: Colors.white),
+                    onPressed: () => _changeMonth(1),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.grey.shade800,
-              padding: const EdgeInsets.symmetric(
-                  vertical: 4), // Giảm vertical padding
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: weekDays.map((day) {
-                  return Text(
-                    day,
-                    style: TextStyle(
-                      color: (day == "T7" || day == "CN")
-                          ? Colors.red
-                          : Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                }).toList(),
-              ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.grey.shade800,
+            padding: const EdgeInsets.symmetric(vertical: 4), // vertical: chiều dọc
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: weekDays.map((day) {
+                return Text(
+                  day,
+                  style: TextStyle(
+                    color: (day == "T7" || day == "CN")
+                        ? Colors.red
+                        : Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              }).toList(),
             ),
-            // lịch tháng hiện tại với các ngày được chia thành 6 hàng và 7 cột
-            AspectRatio(
-              aspectRatio: 1.6, // Đảm bảo chiều cao bằng chiều rộng
-              child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 8.0, vertical: 8.0), // 
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 7,
-                  childAspectRatio: 1.5,
-                  mainAxisSpacing: 4.0,
-                  crossAxisSpacing: 4.0,
-                ),
-                itemCount: 42, // 6 rows * 7 days
-                itemBuilder: (context, index) {
-                  int day;
-                  bool isFromCurrentMonth = true;
-                  // Xác định ngày hiện tại thuộc tháng nào
-                  if (index < prevMonthDaysCount) {
-                    day = prevMonthLastDay - prevMonthDaysCount + index + 1;
-                    isFromCurrentMonth = false;
-                    // Nếu index lớn hơn số ngày của tháng hiện tại
-                  } else if (index >= prevMonthDaysCount + daysInMonth.length) {
-                    day = index - prevMonthDaysCount - daysInMonth.length + 1;
-                    isFromCurrentMonth = false;
-                    // Ngày trong tháng hiện tại
-                  } else {
-                    day = index - prevMonthDaysCount + 1;
-                  }
+          ),
+          AspectRatio(
+            aspectRatio: 1.6,
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0), // vertical: chiều dọc
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 7,
+                childAspectRatio: 1.5,
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+              ),
+              itemCount: 42,
+              itemBuilder: (context, index) {
+                int day;
+                bool isFromCurrentMonth = true;
 
-                  final date = isFromCurrentMonth // Tạo DateTime từ ngày
-                      ? DateTime(displayedMonth.year, displayedMonth.month, day)
-                      : index < prevMonthDaysCount
-                          ? DateTime(displayedMonth.year,
-                              displayedMonth.month - 1, day)
-                          : DateTime(displayedMonth.year,
-                              displayedMonth.month + 1, day);
+                if (index < prevMonthDaysCount) {
+                  day = prevMonthLastDay - prevMonthDaysCount + index + 1;
+                  isFromCurrentMonth = false;
+                } else if (index >= prevMonthDaysCount + daysInMonth.length) {
+                  day = index - prevMonthDaysCount - daysInMonth.length + 1;
+                  isFromCurrentMonth = false;
+                } else {
+                  day = index - prevMonthDaysCount + 1;
+                }
 
-                  final isSelected = selectedDate.day == date.day && // Kiểm tra ngày được chọn
-                      selectedDate.month == date.month &&
-                      selectedDate.year == date.year;
+                final date = isFromCurrentMonth
+                    ? DateTime(displayedMonth.year, displayedMonth.month, day)
+                    : index < prevMonthDaysCount
+                        ? DateTime(
+                            displayedMonth.year, displayedMonth.month - 1, day)
+                        : DateTime(
+                            displayedMonth.year, displayedMonth.month + 1, day);
 
-                  final isWeekend = date.weekday == 6 || date.weekday == 7; // Kiểm tra ngày cuối tuần
+                final isSelected = selectedDate.day == date.day &&
+                    selectedDate.month == date.month &&
+                    selectedDate.year == date.year;
 
-                  final dailyTotal = isFromCurrentMonth // Tính toán số tiền đã sử dụng trong ngày
-                      ? calculateDailyTotal(
-                          date.toIso8601String().split('T')[0]) 
-                      : 0;
+                final isWeekend = date.weekday == 6 || date.weekday == 7;
 
-                  return GestureDetector(
-                    onTap: () => isFromCurrentMonth ? onDaySelected(day) : null,
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? Colors.black
-                            : isWeekend
-                                ? Colors.grey.shade700
-                                : Colors.grey.shade800,
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Opacity(
-                            opacity: isFromCurrentMonth ? 1.0 : 0.5, // Điều chỉnh độ mờ
-                            child: Text(
-                              '$day',
-                              style: TextStyle(
-                                color: isSelected
-                                    ? Colors.white
-                                    : isWeekend
-                                        ? isFromCurrentMonth
-                                            ? Colors.red
-                                            : Colors.grey
-                                        : Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                final dailyTotal = isFromCurrentMonth
+                    ? calculateDailyTotal(date.toIso8601String().split('T')[0])
+                    : 0;
+
+                return GestureDetector(
+                  onTap: () => isFromCurrentMonth ? onDaySelected(day) : null,
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? Colors.black
+                          : isWeekend
+                              ? Colors.grey.shade700
+                              : Colors.grey.shade800,
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Opacity(
+                          opacity: isFromCurrentMonth ? 1.0 : 0.5, // 50%
+                          child: Text(
+                            '$day',
+                            style: TextStyle(
+                              color: isSelected
+                                  ? Colors.white
+                                  : isWeekend
+                                      ? isFromCurrentMonth
+                                          ? Colors.red
+                                          : Colors.grey
+                                      : Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          if (isFromCurrentMonth)
-                            Text(
-                              '${dailyTotal}đ',
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: Colors.white,
-                              ),
+                        ),
+                        if (isFromCurrentMonth)
+                          Text(
+                            '${dailyTotal}đ',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
                             ),
+                          ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4), // vertical: chiều dọc - horizontal: chiều ngang
+            color: Colors.grey.shade800,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  children: [
+                    const Text('Thu Nhập',
+                        style: TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold)),
+                    Text('${totalIncome}đ',
+                        style: const TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Text('Chi Tiêu',
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold)),
+                    Text('${totalExpenses}đ',
+                        style: const TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Text('Tổng',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text('${totalIncome + totalExpenses}đ',
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.grey.shade500,
+              child: ListView.builder(
+                itemCount: monthlyTransactions.length,
+                itemBuilder: (context, index) {
+                  final transaction = monthlyTransactions[index];
+
+                  // Tìm ngày giao dịch dựa trên `transactions`
+                  String? transactionDate;
+                  transactions.forEach((date, transactionList) {
+                    if (transactionList.contains(transaction)) {
+                      transactionDate = date;
+                    }
+                  });
+                  return ListTile(
+                    title: Container(
+                      width: MediaQuery.of(context) // lấy thông 
+                          .size
+                          .width, // chiều rộng của container bằng với màn hình
+                      color: Colors.grey.shade600,
+                      padding:
+                          const EdgeInsets.all(4.0), // padding cho container
+                      child: Text(
+                        transactionDate ?? '',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    subtitle: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      padding: const EdgeInsets.all(4.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            transaction['detail']!,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            transaction['amount']!,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: transaction['amount']!.contains('-')
+                                  ? Colors.red
+                                  : Colors.green,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -264,62 +392,8 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
                 },
               ),
             ),
-            // Tóm tắt thu chi
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              color: Colors.grey.shade700,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      const Text('Thu Nhập',
-                          style: TextStyle(color: Colors.green)),
-                      Text('${totalIncome}đ',
-                          style: const TextStyle(color: Colors.green)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      const Text('Chi Tiêu',
-                          style: TextStyle(color: Colors.red)),
-                      Text('${totalExpenses}đ',
-                          style: const TextStyle(color: Colors.red)),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      const Text('Tổng', style: TextStyle(color: Colors.white)),
-                      Text('${totalIncome + totalExpenses}đ',
-                          style: const TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            // Giao dịch trong tháng
-            ListView.builder(
-              shrinkWrap:
-                  true, // Đảm bảo ListView không chiếm quá nhiều không gian
-              itemCount: monthlyTransactions.length,
-              itemBuilder: (context, index) {
-                final transaction = monthlyTransactions[index];
-                return ListTile(
-                  title: Text(transaction['category']!),
-                  subtitle: Text(transaction['detail']!),
-                  trailing: Text(
-                    transaction['amount']!,
-                    style: TextStyle(
-                        color: transaction['amount']!.contains('-')
-                            ? Colors.red
-                            : Colors.green),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
