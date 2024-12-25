@@ -16,3 +16,7 @@ Dự án được thực hiện bởi nhóm gồm 3 thành viên với sự hư�
 - **Nguyễn Văn Dương** - 22010019  
 
 ## 📂 Nội dung chính  
+
+Dưới đây là sơ đồ UML của dự án:
+
+![Sơ đồ UML](./UML.drawio.png.png)
