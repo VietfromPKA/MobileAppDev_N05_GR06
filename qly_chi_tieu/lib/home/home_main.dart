@@ -4,6 +4,7 @@ import 'calendar_screen.dart';
 import 'report_screen.dart';
 import 'other_screen.dart';
 
+
 void main() => runApp(const ExpenseManagerApp());
 
 class ExpenseManagerApp extends StatefulWidget {

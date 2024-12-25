@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qly_chi_tieu/home/create_item.dart';
+// Đảm bảo đã import màn hình NewCategoryScreen
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -10,6 +12,8 @@ class InputScreen extends StatefulWidget {
 class _InputScreenState extends State<InputScreen> {
   DateTime selectedDate = DateTime.now(); // Biến lưu trữ ngày đã chọn
   String selectedType = 'Chi'; // Mặc định là 'Chi' (Khoản chi)
+  String categoryName = ''; // Biến lưu trữ tên danh mục
+  IconData? selectedCategoryIcon; // Biểu tượng được chọn cho danh mục
 
   // Hàm định dạng ngày
   String formatDate(DateTime date) {
@@ -32,12 +36,6 @@ class _InputScreenState extends State<InputScreen> {
       initialDate: selectedDate, // Ngày mặc định
       firstDate: DateTime(2000), // Ngày bắt đầu
       lastDate: DateTime(2100), // Ngày kết thúc
-      builder: (context, child) {
-        return Theme(
-          data: ThemeData.fallback(), // Thay đổi theme của DatePicker
-          child: child!,
-        );
-      },
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -87,7 +85,6 @@ class _InputScreenState extends State<InputScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  //màu nền của box,
                   color: selectedType == 'Thu' ? Colors.white : Colors.black,
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -101,7 +98,7 @@ class _InputScreenState extends State<InputScreen> {
             ),
           ],
         ),
-        backgroundColor: Colors.black, // Màu nền của AppBar
+        backgroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -116,7 +113,7 @@ class _InputScreenState extends State<InputScreen> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: GestureDetector(
-                    onTap: _selectDate, // Mở lịch khi người dùng ấn vào
+                    onTap: _selectDate,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 16),
@@ -127,7 +124,6 @@ class _InputScreenState extends State<InputScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Hiển thị ngày đã chọn
                           Text(
                             formatDate(selectedDate),
                             style: const TextStyle(color: Colors.white),
@@ -145,7 +141,7 @@ class _InputScreenState extends State<InputScreen> {
             const TextField(
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                labelText: 'Ghi chú', // Ghi chú cho khoản chi/thu
+                labelText: 'Ghi chú',
                 labelStyle: TextStyle(color: Colors.grey),
                 border: OutlineInputBorder(),
                 hintText: 'Chưa nhập vào',
@@ -155,17 +151,15 @@ class _InputScreenState extends State<InputScreen> {
             const SizedBox(height: 16),
             // Phần nhập số tiền (Khoản chi hoặc Khoản thu)
             TextField(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: selectedType == 'Chi'
-                    ? 'Tiền chi'
-                    : 'Tiền thu', // Hiển thị label thay đổi tùy theo lựa chọn
+                labelText: selectedType == 'Chi' ? 'Tiền chi' : 'Tiền thu',
                 labelStyle: const TextStyle(color: Colors.grey),
                 border: const OutlineInputBorder(),
                 hintText: '0',
                 suffixText: '₫',
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
               ),
             ),
             const SizedBox(height: 16),
@@ -174,7 +168,7 @@ class _InputScreenState extends State<InputScreen> {
             const SizedBox(height: 10),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 4, // Lưới 4 cột
+                crossAxisCount: 4,
                 crossAxisSpacing: 4,
                 mainAxisSpacing: 4,
                 children: selectedType == 'Chi'
@@ -191,7 +185,38 @@ class _InputScreenState extends State<InputScreen> {
                         _buildCategoryButton(Icons.directions_bus, 'Đi lại'),
                         _buildCategoryButton(Icons.phone, 'Phí liên lạc'),
                         _buildCategoryButton(Icons.home, 'Tiền nhà'),
-                        _buildCategoryButton(Icons.settings, 'Chỉnh sửa'),
+                        GestureDetector(
+                          onTap: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const NewCategoryScreen(),
+                              ),
+                            );
+                            if (result != null) {
+                              setState(() {
+                                categoryName = result['name'];
+                                selectedCategoryIcon = result['icon'];
+                              });
+                            }
+                          },
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[900],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 30,
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ),
+                        
+                        ),
                       ]
                     : [
                         _buildCategoryButton(Icons.attach_money, 'Tiền lương'),
@@ -200,7 +225,37 @@ class _InputScreenState extends State<InputScreen> {
                         _buildCategoryButton(Icons.add_circle, 'Thu nhập phụ'),
                         _buildCategoryButton(Icons.trending_up, 'Đầu tư'),
                         _buildCategoryButton(Icons.inbox, 'Thu nhập tạm thời'),
-                        _buildCategoryButton(Icons.settings, 'Chỉnh sửa'),
+                        GestureDetector(
+                          onTap: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const NewCategoryScreen(),
+                              ),
+                            );
+                            if (result != null) {
+                              setState(() {
+                                categoryName = result['name'];
+                                selectedCategoryIcon = result['icon'];
+                              });
+                            }
+                          },
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[900],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 30,
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
               ),
             ),
@@ -216,7 +271,6 @@ class _InputScreenState extends State<InputScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: Text(
-                    // ignore: unnecessary_string_interpolations
                     '${selectedType == 'Chi' ? 'Nhập khoản chi' : 'Nhập khoản thu'}',
                     style: const TextStyle(fontSize: 16, color: Colors.black)),
               ),
