@@ -18,7 +18,10 @@ Dự án được thực hiện bởi nhóm gồm 3 thành viên với sự hư�
 ## 📂 Nội dung chính  
 
 Class Diagram
-![Class Diagram](./UML.drawio.png)
+![Class Diagram](qly_chi_tieu/assets/images/UML.drawio.png)
 
 Demo sơ đồ Use-case:
-![Sơ đồ UC](./UC.drawio.png)
+![Sơ đồ UC](qly_chi_tieu/assets/images/UC.drawio.png)
+
+Screenshor myfirst_App
+![main screen](qly_chi_tieu/assets/images/appbar.png)
