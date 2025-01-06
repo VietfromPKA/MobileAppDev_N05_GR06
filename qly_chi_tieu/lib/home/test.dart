@@ -39,8 +39,8 @@ class _InputScreenState extends State<InputScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              decoration: const InputDecoration(
+            const TextField(
+              decoration: InputDecoration(
                 labelText: 'Ghi chú',
               ),
             ),

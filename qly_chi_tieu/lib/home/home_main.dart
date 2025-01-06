@@ -20,7 +20,7 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
   final List<Widget> _screens = [
     const InputScreen(),
     const CalendarScreen(),
-    const ReportScreen(),
+    ReportScreen(),
     const OtherScreen(),
   ];
 
