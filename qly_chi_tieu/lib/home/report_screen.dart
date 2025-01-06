@@ -6,6 +6,8 @@ void main() {
 }
 
 class ReportScreen extends StatelessWidget {
+  const ReportScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,14 +18,16 @@ class ReportScreen extends StatelessWidget {
 }
 
 class UserGridView extends StatelessWidget {
+  const UserGridView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('User Grid View'), backgroundColor: Colors.cyanAccent,),
+      appBar: AppBar(title: const Text('User Grid View'), backgroundColor: Colors.cyanAccent,),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
@@ -39,10 +43,10 @@ class UserGridView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.person, size: 40, color: Colors.blue),
-                    SizedBox(height: 10),
+                    const Icon(Icons.person, size: 40, color: Colors.blue),
+                    const SizedBox(height: 10),
                     Text('Username: ${user.username}',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                     Text('Role: ${user.role}',
                         style: TextStyle(color: Colors.grey[600])),
                   ],
