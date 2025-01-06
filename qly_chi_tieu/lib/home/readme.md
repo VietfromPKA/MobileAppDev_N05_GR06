@@ -218,6 +218,10 @@ class _UserInputScreenState extends State<UserInputScreen> {
 }
 
 ```
+
+### 3. ảnh chụp màn hình
+![Screenshot](assets/images/image.png)
+
 ## Hướng dẫn sử dụng
 
 1. **Cài đặt môi trường Flutter**:
