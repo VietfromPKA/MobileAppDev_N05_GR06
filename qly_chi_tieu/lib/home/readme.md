@@ -55,6 +55,7 @@ final List<User> predefinedUsers = [
   User(username: 'john_doe', password: 'johndoe123', role: 'Admin'),
   User(username: 'jane_doe', password: 'janedoe123', role: 'Editor'),
 ];
+```
 ### 2. Main giao diện
 
 ```dart
@@ -216,7 +217,7 @@ class _UserInputScreenState extends State<UserInputScreen> {
   }
 }
 
-
+```
 ## Hướng dẫn sử dụng
 
 1. **Cài đặt môi trường Flutter**:
