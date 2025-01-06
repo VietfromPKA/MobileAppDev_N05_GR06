@@ -3,7 +3,7 @@
 ## 1. Ảnh chụp màn hình
 
 Dưới đây là ảnh chụp màn hình Mobile App (trên web hoặc trên iOS hoặc trên Android):
-![Screenshot](assets/images/Screenshot%202025-01-06%20143529.png)
+![Screenshot](assets/images/nguyenvanduong.png)
 
 ## 2. Mã nguồn chính
 
@@ -93,4 +93,4 @@ class UserGridView extends StatelessWidget {
 
 ## 4. Link ReadMe và ảnh chụp màn hình
 [Link](NguyenVanDuong.md)
-![Screenshot](assets/images/Screenshot%202025-01-06%20143529.png)
+![Screenshot](assets/images/nguyenvanduong.png)
