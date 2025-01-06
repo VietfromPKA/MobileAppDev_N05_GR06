@@ -20,8 +20,7 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
     const UserInputScreen(),
     const InputScreen(),
     const CalendarScreen(),
-    const ReportScreen(),
-    const UserInputScreen(),
+    ReportScreen(),
   ];
 
   @override

@@ -271,7 +271,7 @@ class _InputScreenState extends State<InputScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: Text(
-                    '${selectedType == 'Chi' ? 'Nhập khoản chi' : 'Nhập khoản thu'}',
+                    selectedType == 'Chi' ? 'Nhập khoản chi' : 'Nhập khoản thu',
                     style: const TextStyle(fontSize: 16, color: Colors.black)),
               ),
             ),
