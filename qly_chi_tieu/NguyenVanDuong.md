@@ -7,7 +7,7 @@ Dưới đây là ảnh chụp màn hình Mobile App (trên web hoặc trên iOS
 
 ## 2. Mã nguồn chính
 
-### 2.1 Class User
+### 2.1 Class User.dart
 
 ```dart
 class User {
@@ -27,7 +27,7 @@ List<User> users = [
   User(username: "user5", password: "pass5", role: "user")
 ];
 ```
-
+### 2.2 Class Main.dart
 ```dart
 import 'package:flutter/material.dart';
 import 'user.dart'; // Import file user.dart
