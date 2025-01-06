@@ -4,7 +4,6 @@ import 'calendar_screen.dart';
 import 'report_screen.dart';
 import 'other_screen.dart';
 
-
 void main() => runApp(const ExpenseManagerApp());
 
 class ExpenseManagerApp extends StatefulWidget {
@@ -18,10 +17,11 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
+    const UserInputScreen(),
     const InputScreen(),
     const CalendarScreen(),
     const ReportScreen(),
-    const OtherScreen(),
+    const UserInputScreen(),
   ];
 
   @override
@@ -41,10 +41,13 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
           selectedItemColor: Colors.teal,
           unselectedItemColor: Colors.grey,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.edit), label: 'Nhập'),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'Lịch'),
-            BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
-            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'Khác'),
+            BottomNavigationBarItem(icon: Icon(Icons.edit), label: 'VuQuocViet_22010256'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_today), label: 'Lịch'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.more_horiz), label: 'Khác'),
           ],
         ),
       ),
