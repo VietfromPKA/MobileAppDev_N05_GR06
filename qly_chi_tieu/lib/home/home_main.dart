@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:qly_chi_tieu/home/DucQuoc-Screen.dart';
 import 'input_screen.dart';
 import 'calendar_screen.dart';
 import 'report_screen.dart';
 import 'other_screen.dart';
-
 
 void main() => runApp(const ExpenseManagerApp());
 
@@ -22,6 +22,7 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
     const CalendarScreen(),
     const ReportScreen(),
     const OtherScreen(),
+    DucQuocScreen(),
   ];
 
   @override
@@ -42,9 +43,14 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
           unselectedItemColor: Colors.grey,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.edit), label: 'Nhập'),
-            BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: 'Lịch'),
-            BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
-            BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'Khác'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_today), label: 'Lịch'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.more_horiz), label: 'Khác'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.more_horiz), label: 'Đức Quốc'),
           ],
         ),
       ),
