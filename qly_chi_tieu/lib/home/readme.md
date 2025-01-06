@@ -220,7 +220,7 @@ class _UserInputScreenState extends State<UserInputScreen> {
 ```
 
 ### 3. ảnh chụp màn hình
-![Screenshot](qly_chi_tieu/assets/images/image.png)
+![anhdemo](qly_chi_tieu/assets/images/image.png)
 
 ## Hướng dẫn sử dụng
 
