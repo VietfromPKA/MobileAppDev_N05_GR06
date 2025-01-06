@@ -276,7 +276,7 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
                         ),
                         if (isFromCurrentMonth)
                           Text(
-                            '${dailyTotal}đ',
+                            '$dailyTotalđ',
                             style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -300,7 +300,7 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
                     const Text('Thu Nhập',
                         style: TextStyle(
                             color: Colors.green, fontWeight: FontWeight.bold)),
-                    Text('${totalIncome}đ',
+                    Text('$totalIncomeđ',
                         style: const TextStyle(
                             color: Colors.green, fontWeight: FontWeight.bold)),
                   ],
@@ -310,7 +310,7 @@ class _PublicCalendarScreenState extends State<CalendarScreen> {
                     const Text('Chi Tiêu',
                         style: TextStyle(
                             color: Colors.red, fontWeight: FontWeight.bold)),
-                    Text('${totalExpenses}đ',
+                    Text('$totalExpensesđ',
                         style: const TextStyle(
                             color: Colors.red, fontWeight: FontWeight.bold)),
                   ],

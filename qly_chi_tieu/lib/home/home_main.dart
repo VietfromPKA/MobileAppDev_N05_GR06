@@ -18,10 +18,10 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
+    const UserInputScreen(),
     const InputScreen(),
     const CalendarScreen(),
     const ReportScreen(),
-    const OtherScreen(),
     DucQuocScreen(),
   ];
 
