@@ -7,6 +7,8 @@ void main() {
 
 // Widget gốc của ứng dụng
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,19 +26,21 @@ class MyApp extends StatelessWidget {
 
 // Widget màn hình chính
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Thanh AppBar hiển thị tiêu đề
       appBar: AppBar(
-        title: Text('Danh sách màu'),
+        title: const Text('Danh sách màu'),
       ),
       // Phần nội dung chính
       body: Column(
         children: [
           // Phần tiêu đề với khoảng cách
-          Padding(
-            padding: const EdgeInsets.all(16.0), // Khoảng cách 16 đơn vị
+          const Padding(
+            padding: EdgeInsets.all(16.0), // Khoảng cách 16 đơn vị
             child: Text(
               'Welcome to Flutter!',
               style: TextStyle(
@@ -46,7 +50,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           // Đường kẻ ngang phân cách
-          Divider(),
+          const Divider(),
           // Danh sách các mục
           Expanded(
             child: ListView.builder(
@@ -64,19 +68,19 @@ class MyHomePage extends StatelessWidget {
                     height: 50,
                     color: backgroundColor, // Màu nền
                     child: ListTile(
-                      leading: Icon(Icons.star,
+                      leading: const Icon(Icons.star,
                           size: 20), // Biểu tượng bên trái// Thu nhỏ biểu tượng
                       title: Text(
                         'Mục ${index + 1}', // Tiêu đề
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold /*In đậm */,
                             fontSize: 14), // Giảm kích thước chữ
                       ),
                       subtitle: Text(
                         'Chọn mục ${index + 1}',
-                        style: TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 12),
                       ), // Giảm kích thước chữ phụ),  // Phụ đề
-                      trailing: Icon(Icons.arrow_forward,
+                      trailing: const Icon(Icons.arrow_forward,
                           size: 20), // Biểu tượng bên phải
                       onTap: () {
                         // Khi người dùng nhấn vào mục
