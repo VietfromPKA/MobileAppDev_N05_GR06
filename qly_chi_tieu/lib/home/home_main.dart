@@ -52,9 +52,9 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.more_horiz), label: 'Văn Dương_1'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Đức Quốc'),
+                icon: Icon(Icons.person), label: 'Đức Quốc'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Review Bánh'),
+                icon: Icon(Icons.cake_outlined), label: 'Review Bánh'),
           ],
         ),
       ),
