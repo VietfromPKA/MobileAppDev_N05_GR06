@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:qly_chi_tieu/home/User_NguyenDucQuoc/DucQuoc-Screen.dart';
 import 'User_NguyenDucQuoc/apptest.dart';
+=======
+import 'package:qly_chi_tieu/home/DucQuoc-Screen.dart';
+import 'package:qly_chi_tieu/home/VanDuong_Screen.dart';
+>>>>>>> 1525ff9a7e8c0ea59d2a0d2964addc452131970d
 import 'input_screen.dart';
 import 'calendar_screen.dart';
 import 'report_screen.dart';
@@ -19,12 +24,16 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const UserInputScreen(),
     const InputScreen(),
     const CalendarScreen(),
     const ReportScreen(),
+    const UserInputScreen(),
     DucQuocScreen(),
+<<<<<<< HEAD
     AppTestScreen(),
+=======
+    VanDuongScreen(),
+>>>>>>> 1525ff9a7e8c0ea59d2a0d2964addc452131970d
   ];
 
   @override
@@ -54,7 +63,11 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.more_horiz), label: 'Đức Quốc'),
             BottomNavigationBarItem(
+<<<<<<< HEAD
                 icon: Icon(Icons.more_horiz), label: 'Review Bánh'),
+=======
+                icon: Icon(Icons.person_2_outlined), label: 'Văn Dương'),
+>>>>>>> 1525ff9a7e8c0ea59d2a0d2964addc452131970d
           ],
         ),
       ),
