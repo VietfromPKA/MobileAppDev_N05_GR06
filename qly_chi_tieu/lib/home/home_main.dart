@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qly_chi_tieu/home/User_NguyenDucQuoc/DucQuoc-Screen.dart';
+import 'package:qly_chi_tieu/home/VanDuong_Screen.dart';
 import 'User_NguyenDucQuoc/apptest.dart';
 import 'input_screen.dart';
 import 'calendar_screen.dart';
@@ -24,7 +25,7 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
     const CalendarScreen(),
     const ReportScreen(),
     DucQuocScreen(),
-    const AppTestScreen(),
+    AppTestScreen(),
   ];
 
   @override
@@ -50,11 +51,11 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Văn Dương_1'),
+                icon: Icon(Icons.more_horiz), label: 'Việt'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person), label: 'Đức Quốc'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.cake_outlined), label: 'Review Bánh'),
+                icon: Icon(Icons.more_horiz), label: 'Review Bánh'),
           ],
         ),
       ),
