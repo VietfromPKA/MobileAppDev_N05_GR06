@@ -1,3 +1,39 @@
+# User Management App - Nguyễn Đức Quốc (22010234)
+
+## Mô Tả
+Cho phép người dùng nhập vào thông tin của các người dùng, bao gồm: 
+- **Tên người dùng** (username)
+- **Mật khẩu** (password)
+- **Vai trò** (role)
+Sau khi nhập thì thông tin sẽ hiển thị dưới dạng 'GridView'.
+
+## Ảnh chụp màn hình
+Ảnh chụp màn hình Mobile App (trên web hoặc trên iOS hoặc trên Android):
+![Screenshot](assets\images\NguyenDucQuoc.png)
+
+## Mã Nguồn
+### 2.1 Class user.dart
+
+```dart
+class User {
+  String username;
+  String password;
+  String role;
+
+  User({required this.username, required this.password, required this.role});
+}
+
+final List<User> users = [
+  User(username: "user1", password: "*****", role: "Admin"),
+  User(username: "user2", password: "*****", role: "Editor"),
+  User(username: "user3", password: "*****", role: "Viewer"),
+  User(username: "user4", password: "*****", role: "Contributor"),
+];
+```
+
+### 2.2 Class DucQuoc-Screen.dart
+
+```dart
 import 'package:flutter/material.dart';
 import 'user.dart';
 
@@ -172,3 +208,10 @@ class _UserGridScreenState extends State<UserGridScreen> {
     );
   }
 }
+```
+
+## Link README
+![Link](NguyenDucQuoc.md)
+
+## Link Github
+![Link](https://github.com/VietfromPKA/MobileAppDev_N05_GR06)
