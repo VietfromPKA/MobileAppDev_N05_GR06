@@ -27,6 +27,7 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
     DucQuocScreen(),
     const AppTestScreen(),
     VanDuongScreen(),
+
   ];
 
   @override
@@ -52,7 +53,7 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Văn Dương_1'),
+                icon: Icon(Icons.more_horiz), label: 'Việt'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.more_horiz), label: 'Đức Quốc'),
             BottomNavigationBarItem(
