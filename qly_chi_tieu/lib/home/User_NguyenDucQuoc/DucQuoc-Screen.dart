@@ -10,6 +10,9 @@ class DucQuocScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: UserGridScreen(),
     );
   }
@@ -20,12 +23,17 @@ class UserGridScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("User Grid View"),
+        backgroundColor: Colors.black,
+        title: Text(
+          "Danh sách người dùng",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
+      backgroundColor: Colors.white,
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Số cột trong GridView
+          crossAxisCount: 2,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
         ),
@@ -34,24 +42,47 @@ class UserGridScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final user = users[index];
           return Card(
-            elevation: 4.0,
+            color: Colors.black,
+            elevation: 6.0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(15.0),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Icon(
+                    Icons.person,
+                    size: 40.0,
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: 10.0),
                   Text(
                     "Username: ${user.username}",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
                   ),
                   SizedBox(height: 5.0),
-                  Text("Password: ${user.password}"),
+                  Text(
+                    "Password: ${user.password}",
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14.0,
+                    ),
+                  ),
                   SizedBox(height: 5.0),
-                  Text("Role: ${user.role}"),
+                  Text(
+                    "Role: ${user.role}",
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14.0,
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qly_chi_tieu/home/DucQuoc-Screen.dart';
+import 'package:qly_chi_tieu/home/User_NguyenDucQuoc/DucQuoc-Screen.dart';
 import 'input_screen.dart';
 import 'calendar_screen.dart';
 import 'report_screen.dart';
