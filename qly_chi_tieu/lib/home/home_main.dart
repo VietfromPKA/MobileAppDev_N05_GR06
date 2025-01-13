@@ -24,7 +24,11 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
     const CalendarScreen(),
     const ReportScreen(),
     DucQuocScreen(),
-    const AppTestScreen(),
+<<<<<<< HEAD
+    AppTestScreen(),
+=======
+    VanDuongScreen(),
+>>>>>>> 1525ff9a7e8c0ea59d2a0d2964addc452131970d
   ];
 
   @override
