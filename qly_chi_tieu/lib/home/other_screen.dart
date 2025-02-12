@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'User List App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const UserInputScreen(), // Màn hình nhập và hiển thị danh sách người dùng
+      home:
+          const UserInputScreen(), // Màn hình nhập và hiển thị danh sách người dùng
     );
   }
 }
@@ -30,8 +31,9 @@ class UserInputScreen extends StatefulWidget {
 
 class _UserInputScreenState extends State<UserInputScreen> {
   // Sử dụng danh sách người dùng từ user.dart
-  final List<User> users = List.from(predefinedUsers); // Dùng danh sách đã định nghĩa sẵn từ user.dart
-  
+  final List<User> users = List.from(
+      predefinedUsers); // Dùng danh sách đã định nghĩa sẵn từ user.dart
+
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController roleController = TextEditingController();
@@ -80,7 +82,7 @@ class _UserInputScreenState extends State<UserInputScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            
+
             // Nhập mật khẩu
             TextField(
               controller: passwordController,
@@ -91,7 +93,7 @@ class _UserInputScreenState extends State<UserInputScreen> {
               obscureText: true, // Ẩn mật khẩu khi nhập
             ),
             const SizedBox(height: 10),
-            
+
             // Nhập vai trò
             TextField(
               controller: roleController,
@@ -101,18 +103,19 @@ class _UserInputScreenState extends State<UserInputScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            
+
             // Nút thêm người dùng
             ElevatedButton(
               onPressed: _addUser,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
               ),
               child: Text('Thêm người dùng (${users.length})'),
             ),
             const SizedBox(height: 20),
-            
+
             // Hiển thị danh sách người dùng
             Expanded(
               child: users.isEmpty
@@ -123,7 +126,8 @@ class _UserInputScreenState extends State<UserInputScreen> {
                       ),
                     )
                   : GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, // Giảm số cột xuống 2
                         crossAxisSpacing: 8.0,
                         mainAxisSpacing: 8.0,
@@ -139,13 +143,17 @@ class _UserInputScreenState extends State<UserInputScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(Icons.person, color: Colors.blue, size: 50),
+                                const Icon(Icons.person,
+                                    color: Colors.blue, size: 50),
                                 const SizedBox(height: 8),
                                 Text(
                                   'Tên người dùng: ${user.username}',
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Text('Vai trò: ${user.role}', style: const TextStyle(color: Colors.grey)),
+                                Text('Vai trò: ${user.role}',
+                                    style: const TextStyle(color: Colors.grey)),
                               ],
                             ),
                           ),

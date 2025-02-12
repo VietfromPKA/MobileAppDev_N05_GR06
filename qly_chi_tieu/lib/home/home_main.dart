@@ -24,8 +24,9 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
     const InputScreen(),
     const CalendarScreen(),
     const ReportScreen(),
-    DucQuocScreen(),
-    AppTestScreen(),
+    const DucQuocScreen(),
+    const AppTestScreen(),
+    const VanDuongScreen(),
   ];
 
   @override
@@ -51,13 +52,13 @@ class _ExpenseManagerAppState extends State<ExpenseManagerApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.pie_chart), label: 'Báo cáo'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Việt'),
+                icon: Icon(Icons.person_2), label: 'Dương'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Đức Quốc'),
+                icon: Icon(Icons.person_2), label: 'Đức Quốc'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.more_horiz), label: 'Review Bánh'),
+                icon: Icon(Icons.cake_outlined), label: 'Review Bánh'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person_2_rounded), label: 'Dương'),
+                icon: Icon(Icons.person_2_rounded), label: 'Review Scenery'),
           ],
         ),
       ),

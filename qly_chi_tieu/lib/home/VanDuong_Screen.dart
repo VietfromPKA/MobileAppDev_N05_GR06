@@ -5,70 +5,110 @@ void main() {
 }
 
 class VanDuongScreen extends StatelessWidget {
-  const VanDuongScreen({Key? key}) : super(key: key);
+  const VanDuongScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.black87),
+        ),
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Strawberry Pavlova'),
+          title: const Text('Lá Phong Đỏ'),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {},
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Column(
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
-                      'Strawberry Pavlova',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Lá Phong Đỏ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Cảnh sắc mùa thu với những chiếc lá phong đỏ rực rỡ. Vẻ đẹp tự nhiên này chắc chắn sẽ làm say đắm bất kỳ ai chiêm ngưỡng.',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Đánh giá:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Row(
+                            children: List.generate(5, (index) => const Icon(Icons.star, color: Colors.yellow)),
+                          ),
+                          const SizedBox(height: 5),
+                          const Text('250 Đánh giá'),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Chi tiết:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          const Text('Địa điểm: Rừng phong Canada'),
+                          const SizedBox(height: 5),
+                          const Text('Thời gian tốt nhất để thăm: Mùa thu'),
+                          const SizedBox(height: 5),
+                          const Text('Hoạt động: Chụp ảnh, Thưởng ngoạn'),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Pavlova is a meringue-based dessert named after the Russian ballerina Anna Pavlova. Pavlova features a crisp crust and soft, light inside, topped with fruit and whipped cream.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Rating:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(
+                          '../assets/images/mua-thu.jpg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    Row(
-                      children: List.generate(5, (index) => const Icon(Icons.star, color: Colors.yellow)),
-                    ),
-                    const Text('170 Reviews'),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Preparation and Cooking Time:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const Text('PREP: 29 min'),
-                    const Text('COOK: 1 hr'),
-                    const Text('FEEDS: 4-6'),
                   ],
                 ),
               ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Image.asset(
-                  '../assets/images/anh-1.jpg',
-                  fit: BoxFit.contain,
+              const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  textStyle: const TextStyle(fontSize: 18),
                 ),
+                icon: const Icon(Icons.explore),
+                label: const Text('Khám Phá Thêm'),
               ),
             ],
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // Hàm main: Điểm khởi đầu của ứng dụng
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 // Widget gốc của ứng dụng
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // Widget chính khi ứng dụng khởi chạy
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }

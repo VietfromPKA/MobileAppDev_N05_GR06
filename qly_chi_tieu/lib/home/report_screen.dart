@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './User_NguyenVanDuong/User.dart';
 
 void main() {
-  runApp(ReportScreen());
+  runApp(const ReportScreen());
 }
 
 class ReportScreen extends StatelessWidget {
@@ -12,7 +12,7 @@ class ReportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: UserGridView(),
+      home: const UserGridView(),
     );
   }
 }

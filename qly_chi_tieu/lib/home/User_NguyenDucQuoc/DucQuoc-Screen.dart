@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'user.dart';
 
 void main() {
-  runApp(DucQuocScreen());
+  runApp(const DucQuocScreen());
 }
 
 class DucQuocScreen extends StatelessWidget {
+  const DucQuocScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,12 +15,14 @@ class DucQuocScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: UserGridScreen(),
+      home: const UserGridScreen(),
     );
   }
 }
 
 class UserGridScreen extends StatefulWidget {
+  const UserGridScreen({super.key});
+
   @override
   _UserGridScreenState createState() => _UserGridScreenState();
 }
@@ -52,7 +56,7 @@ class _UserGridScreenState extends State<UserGridScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           "Danh sách người dùng",
           style: TextStyle(color: Colors.white),
         ),
@@ -64,7 +68,7 @@ class _UserGridScreenState extends State<UserGridScreen> {
           // Danh sách người dùng
           Expanded(
             child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
@@ -85,32 +89,32 @@ class _UserGridScreenState extends State<UserGridScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.person,
                           size: 40.0,
                           color: Colors.white,
                         ),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         Text(
                           "Username: ${user.username}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
                         ),
-                        SizedBox(height: 5.0),
+                        const SizedBox(height: 5.0),
                         Text(
                           "Password: ${user.password}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white70,
                             fontSize: 14.0,
                           ),
                         ),
-                        SizedBox(height: 5.0),
+                        const SizedBox(height: 5.0),
                         Text(
                           "Role: ${user.role}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white70,
                             fontSize: 14.0,
                           ),
@@ -130,39 +134,39 @@ class _UserGridScreenState extends State<UserGridScreen> {
               children: [
                 TextField(
                   controller: _usernameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Username",
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 TextField(
                   controller: _passwordController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(),
                   ),
                   obscureText: true,
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 TextField(
                   controller: _roleController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Role",
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 ElevatedButton(
                   onPressed: _addUser,
-                  child: Text("Thêm"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  child: const Text("Thêm"),
                 ),
               ],
             ),
