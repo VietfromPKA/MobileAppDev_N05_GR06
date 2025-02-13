@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu/screens/login_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
-import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,16 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => ExpenseProvider()),
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => ExpenseProvider(),
       child: MaterialApp(
         title: 'Quản lý Chi tiêu',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.teal,
         ),
-        home: HomeScreen(),
+        home: LoginScreen(),
+        routes: {
+          '/home': (context) => HomeScreen(),
+          '/login': (context) => LoginScreen(),
+        },
       ),
     );
   }

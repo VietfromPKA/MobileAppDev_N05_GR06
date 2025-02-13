@@ -1,18 +1,8 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
 const router = express.Router();
+const Expense = require('../models/expense');
 
-const expenseSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  amount: { type: Number, required: true },
-  date: { type: Date, required: true, default: Date.now },
-  category: { type: String, required: true }
-});
-
-const Expense = mongoose.model('Expense', expenseSchema);
-
-// Lấy tất cả các chi tiêu
+// Lấy tất cả các expense
 router.get('/', async (req, res) => {
   try {
     const expenses = await Expense.find();
@@ -22,13 +12,14 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Tạo một chi tiêu mới
+// Thêm một expense mới
 router.post('/', async (req, res) => {
   const expense = new Expense({
     title: req.body.title,
     amount: req.body.amount,
     date: req.body.date,
-    category: req.body.category
+    category: req.body.category,
+    type: req.body.type
   });
 
   try {
@@ -39,12 +30,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Lấy một chi tiêu theo ID
-router.get('/:id', getExpense, (req, res) => {
-  res.json(res.expense);
-});
-
-// Cập nhật một chi tiêu theo ID
+// Cập nhật một expense
 router.patch('/:id', getExpense, async (req, res) => {
   if (req.body.title != null) {
     res.expense.title = req.body.title;
@@ -58,7 +44,10 @@ router.patch('/:id', getExpense, async (req, res) => {
   if (req.body.category != null) {
     res.expense.category = req.body.category;
   }
-
+  if (req.body.type != null) {
+    res.expense.type = req.body.type;
+  }
+  
   try {
     const updatedExpense = await res.expense.save();
     res.json(updatedExpense);
@@ -67,27 +56,28 @@ router.patch('/:id', getExpense, async (req, res) => {
   }
 });
 
-// Xóa một chi tiêu theo ID
+// Xóa một expense
 router.delete('/:id', getExpense, async (req, res) => {
   try {
     await res.expense.remove();
-    res.json({ message: 'Đã xóa chi tiêu' });
+    res.json({ message: 'Deleted Expense' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Middleware để lấy chi tiêu theo ID
+// Middleware để lấy expense theo ID
 async function getExpense(req, res, next) {
   let expense;
   try {
     expense = await Expense.findById(req.params.id);
     if (expense == null) {
-      return res.status(404).json({ message: 'Không tìm thấy chi tiêu' });
+      return res.status(404).json({ message: 'Cannot find expense' });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
+
   res.expense = expense;
   next();
 }

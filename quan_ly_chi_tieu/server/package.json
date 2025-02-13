@@ -7,8 +7,10 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.21.2",
-    "mongoose": "^8.10.0"
+    "mongoose": "^8.10.0",
+    "uuid": "^11.0.5"
   },
   "author": "",
   "license": "ISC"

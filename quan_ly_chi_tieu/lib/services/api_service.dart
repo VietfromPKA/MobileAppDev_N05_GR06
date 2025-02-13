@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:quan_ly_chi_tieu/models/expense.dart';
 
 class ApiService {
-  final String baseUrl = 'http://10.6.136.115:3000'; // URL của API trên máy tính cục bộ với địa chỉ IP
+  final String baseUrl = 'http://192.168.102.17:3000'; // URL của API trên máy tính cục bộ với địa chỉ IP
 
   Future<List<Expense>> getAllExpenses() async {
     final response = await http.get(Uri.parse('$baseUrl/expenses'));

@@ -1,22 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const expensesRoutes = require('./routes/expense_routes');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const expensesRouter = require('./routes/expenses');
+const authRouter = require('./routes/auth'); // Import routes from auth.js
+const config = require('./config');
 
 const app = express();
-app.use(express.json());
 
-mongoose.connect('mongodb+srv://22010019:12345aA@expenses.i16kc.mongodb.net/quan_ly_chi_tieu?retryWrites=true&w=majority', {
+// Kết nối đến MongoDB
+mongoose.connect(config.mongoURI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Connected to MongoDB Atlas');
-}).catch(err => {
-  console.error('Connection error', err.message);
-});
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected...'))
+.catch(err => console.log(err));
 
-app.use('/expenses', expensesRoutes);
+app.use(cors());
+app.use(bodyParser.json());
+app.use('/expenses', expensesRouter);
+app.use('/auth', authRouter); // Use auth routes
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

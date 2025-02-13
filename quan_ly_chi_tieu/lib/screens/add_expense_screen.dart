@@ -8,7 +8,7 @@ class AddExpenseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thêm chi tiêu'),
+        title: Text('Thêm giao dịch'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),

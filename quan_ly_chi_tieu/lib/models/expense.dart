@@ -4,6 +4,7 @@ class Expense {
   double amount;
   DateTime date;
   String category;
+  String type;
 
   Expense({
     required this.id,
@@ -11,15 +12,17 @@ class Expense {
     required this.amount,
     required this.date,
     required this.category,
+    required this.type,
   });
 
   factory Expense.fromMap(Map<String, dynamic> map) {
     return Expense(
-      id: map['_id'],
-      title: map['title'],
-      amount: map['amount'] is int ? (map['amount'] as int).toDouble() : map['amount'],
+      id: map['_id'] ?? '',
+      title: map['title'] ?? '',
+      amount: (map['amount'] as num).toDouble(), // Chuyển đổi kiểu dữ liệu amount sang double
       date: DateTime.parse(map['date']),
-      category: map['category'],
+      category: map['category'] ?? '',
+      type: map['type'] ?? '',
     );
   }
 
@@ -30,6 +33,7 @@ class Expense {
       'amount': amount,
       'date': date.toIso8601String(),
       'category': category,
+      'type': type,
     };
   }
 }
