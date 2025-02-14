@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
 import 'package:quan_ly_chi_tieu/widgets/expense_card.dart';
-import 'package:quan_ly_chi_tieu/screens/add_expense_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/expenses/add_expense_screen.dart';
 
 class ExpenseList extends StatelessWidget {
   const ExpenseList({super.key});

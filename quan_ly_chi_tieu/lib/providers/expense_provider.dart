@@ -27,7 +27,7 @@ class ExpenseProvider with ChangeNotifier {
     try {
       final newExpense = await _apiService.addExpense(expense);
       _expenses.add(newExpense);
-      _filteredExpenses = List.from(_expenses); // Chỉ cập nhật _filteredExpenses một lần
+      _filteredExpenses = List.from(_expenses); 
       notifyListeners();
     } catch (e) {
       print(e);
@@ -41,7 +41,7 @@ class ExpenseProvider with ChangeNotifier {
       _filteredExpenses = List.from(_expenses);
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to delete expense');
+      throw Exception('Xóa chi tiêu thất bại');
     }
   }
 

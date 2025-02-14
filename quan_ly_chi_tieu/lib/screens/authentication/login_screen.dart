@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/services/auth_service.dart';
-import 'package:quan_ly_chi_tieu/screens/register_screen.dart';
-import 'package:quan_ly_chi_tieu/screens/forgot_password_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/authentication/register_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/authentication/forgot_password_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {

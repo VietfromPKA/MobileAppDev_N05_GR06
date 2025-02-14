@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quan_ly_chi_tieu/screens/add_expense_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/expenses/add_expense_screen.dart';
 import 'package:quan_ly_chi_tieu/widgets/expense_list.dart';
-import 'package:quan_ly_chi_tieu/screens/statistics_screen.dart';
-import 'package:quan_ly_chi_tieu/screens/calendar_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/expenses/statistics_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/calendar/calendar_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Chi tiêu',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
+            icon: Icon(Icons.graphic_eq),
             label: 'Thống kê',
           ),
           BottomNavigationBarItem(

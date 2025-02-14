@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quan_ly_chi_tieu/screens/login_screen.dart';
+import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
