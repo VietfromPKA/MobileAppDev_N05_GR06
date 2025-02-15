@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,15 +15,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ExpenseProvider(),
-      child: MaterialApp(
-        title: 'Quản lý Chi tiêu',
-        theme: ThemeData(
-          primarySwatch: Colors.teal,
+      child: CupertinoApp(
+        theme: const CupertinoThemeData(
+          primaryColor: CupertinoColors.systemTeal,
+          brightness: Brightness.light,
         ),
-        home: LoginScreen(),
+        home: const LoginScreen(),
         routes: {
-          '/home': (context) => HomeScreen(),
-          '/login': (context) => LoginScreen(),
+          '/home': (context) => const HomeScreen(),
+          '/login': (context) => const LoginScreen(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == '/home') {
+            return CupertinoPageRoute(builder: (context) => const HomeScreen());
+          } else if (settings.name == '/login') {
+            return CupertinoPageRoute(builder: (context) => const LoginScreen());
+          }
+          return null;
         },
       ),
     );

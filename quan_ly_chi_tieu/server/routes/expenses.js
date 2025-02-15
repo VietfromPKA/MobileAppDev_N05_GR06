@@ -30,25 +30,26 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Cập nhật một expense
+// Update an expense (using PATCH)
 router.patch('/:id', getExpense, async (req, res) => {
-  if (req.body.title != null) {
-    res.expense.title = req.body.title;
-  }
-  if (req.body.amount != null) {
-    res.expense.amount = req.body.amount;
-  }
-  if (req.body.date != null) {
-    res.expense.date = req.body.date;
-  }
-  if (req.body.category != null) {
-    res.expense.category = req.body.category;
-  }
-  if (req.body.type != null) {
-    res.expense.type = req.body.type;
-  }
-  
   try {
+      // Update fields ONLY if they are present in the request body
+        if (req.body.title != null) {
+          res.expense.title = req.body.title;
+        }
+        if (req.body.amount != null) {
+          res.expense.amount = req.body.amount;
+        }
+        if (req.body.date != null) {
+          res.expense.date = req.body.date;
+        }
+        if (req.body.category != null) {
+          res.expense.category = req.body.category;
+        }
+        if (req.body.type != null) {
+          res.expense.type = req.body.type;
+        }
+
     const updatedExpense = await res.expense.save();
     res.json(updatedExpense);
   } catch (err) {
@@ -56,17 +57,19 @@ router.patch('/:id', getExpense, async (req, res) => {
   }
 });
 
-// Xóa một expense
+// Delete an expense
 router.delete('/:id', getExpense, async (req, res) => {
   try {
-    await res.expense.remove();
+    // Correct way to delete: Use Expense.deleteOne() or findByIdAndDelete()
+    await Expense.deleteOne({ _id: req.params.id }); // Use deleteOne
+    // OR: await Expense.findByIdAndDelete(req.params.id);
     res.json({ message: 'Deleted Expense' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Middleware để lấy expense theo ID
+// Middleware to get expense by ID
 async function getExpense(req, res, next) {
   let expense;
   try {
@@ -75,6 +78,9 @@ async function getExpense(req, res, next) {
       return res.status(404).json({ message: 'Cannot find expense' });
     }
   } catch (err) {
+    if (err.name === 'CastError' && err.kind === 'ObjectId') {
+      return res.status(400).json({ message: 'Invalid expense ID format' });
+    }
     return res.status(500).json({ message: err.message });
   }
 

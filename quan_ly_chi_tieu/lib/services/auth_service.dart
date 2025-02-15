@@ -19,8 +19,12 @@ class AuthService {
       final responseData = jsonDecode(response.body);
       userId = responseData['userId']; // Lưu trữ userId sau khi đăng nhập thành công
     } else {
-      final responseData = jsonDecode(response.body);
-      throw Exception(responseData['message']);
+      try {
+        final responseData = jsonDecode(response.body);
+        throw Exception(responseData['message']);
+      } catch (e) {
+        throw Exception('Failed to login');
+      }
     }
   }
 
@@ -36,8 +40,12 @@ class AuthService {
     if (response.statusCode == 201) {
       return;
     } else {
-      final responseData = jsonDecode(response.body);
-      throw Exception(responseData['message']);
+      try {
+        final responseData = jsonDecode(response.body);
+        throw Exception(responseData['message']);
+      } catch (e) {
+        throw Exception('Failed to register');
+      }
     }
   }
 
@@ -52,6 +60,31 @@ class AuthService {
 
     if (response.statusCode != 200) {
       throw Exception('Failed to send reset email');
+    }
+  }
+
+  Future<void> logout() async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/logout'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({'userId': userId}), // Gửi userId để đăng xuất
+    );
+
+    if (response.statusCode == 200) {
+      userId = null; // Xóa userId sau khi đăng xuất thành công
+    } else {
+      try {
+        final responseBody = response.body; // Lưu trữ nội dung phản hồi
+        if (responseBody.startsWith('<!DOCTYPE html>')) {
+          throw Exception('Server returned an HTML response');
+        }
+        final responseData = jsonDecode(response.body);
+        throw Exception('Failed to logout: ${responseData['message']} - Response: $responseBody');
+      } catch (e) {
+        throw Exception('Failed to logout: $e');
+      }
     }
   }
 }
