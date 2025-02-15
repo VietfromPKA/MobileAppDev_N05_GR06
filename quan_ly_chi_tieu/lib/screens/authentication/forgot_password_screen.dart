@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/services/auth_service.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -17,70 +18,129 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('Quên mật khẩu'),
-        backgroundColor: CupertinoColors.systemGrey6,  // Light background
-        border: const Border(bottom: BorderSide(width: 0.0, color: CupertinoColors.systemGrey)),
+        middle: const Text(
+          'Quên Mật Khẩu',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: CupertinoColors.systemBackground,
+        automaticallyImplyLeading: false,
       ),
-      child: SafeArea( // Add SafeArea
+      child: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(24.0),
             child: Form(
               key: _formKey,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // Logo
+                  Image.asset(
+                    'assets/images/logo.png',
+                    height: 250,
+                  ),
+                  const SizedBox(height: 32),
+                  // Tiêu đề
                   const Text(
                     'Quên mật khẩu',
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: CupertinoColors.label,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Nhập email của bạn để đặt lại mật khẩu',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: CupertinoColors.secondaryLabel,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  // Email Field
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: CupertinoColors.systemGrey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: CupertinoTextField(
+                      controller: _emailController,
+                      placeholder: 'Email',
+                      prefix: const Padding(
+                        padding: EdgeInsets.only(left: 8.0),
+                        child: Icon(CupertinoIcons.mail, color: CupertinoColors.systemGrey),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.systemBackground,
+                        border: Border.all(color: CupertinoColors.systemGrey4),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  CupertinoTextFormFieldRow(  // Use CupertinoTextFormFieldRow
-                    controller: _emailController,
-                    placeholder: 'Email', // Placeholder instead of labelText
-                    prefix: const Icon(CupertinoIcons.mail), // Cupertino icon
-                    keyboardType: TextInputType.emailAddress, // Specify keyboard type
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Vui lòng nhập email';
-                      }
-                      // Add email validation (optional, but recommended)
-                      if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$").hasMatch(value)) {
-                          return 'Vui lòng nhập một địa chỉ email hợp lệ.';
+                  // Gửi yêu cầu Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: CupertinoButton.filled(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      borderRadius: BorderRadius.circular(12),
+                      child: _isLoading
+                          ? const CupertinoActivityIndicator()
+                          : const Text(
+                              'Gửi yêu cầu',
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                      onPressed: () async {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          try {
+                            await AuthService().forgotPassword(_emailController.text);
+                            // Show success dialog
+                            _showSuccessDialog(context);
+                          } catch (e) {
+                            _showErrorDialog(context, e.toString());
+                          } finally {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          }
                         }
-                      return null;
-                    },
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 16),
-                  _isLoading
-                      ? const CupertinoActivityIndicator() // Cupertino Activity Indicator
-                      : CupertinoButton.filled(  // Use CupertinoButton.filled
-                          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0), // Optional padding, adjust as needed
-                          onPressed: () async {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              setState(() {
-                                _isLoading = true;
-                              });
-                              try {
-                                await AuthService().forgotPassword(_emailController.text);
-                                // Use CupertinoAlertDialog for success message
-                                _showSuccessDialog(context);
-
-                              } catch (e) {
-                                // Use CupertinoAlertDialog for error message
-                                _showErrorDialog(context, e.toString());
-                              } finally {
-                                   setState(() {
-                                      _isLoading = false;
-                                    });
-                              }
-                            }
-                          },
-                          child: const Text(
-                            'Gửi yêu cầu',
-                            style: TextStyle(fontSize: 18),
-                          ),
+                  const SizedBox(height: 24),
+                  // Quay lại đăng nhập
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Quay lại ',
+                        style: TextStyle(color: CupertinoColors.secondaryLabel),
+                      ),
+                      CupertinoButton(
+                        padding: EdgeInsets.zero,
+                        child: const Text(
+                          'Đăng nhập',
+                          style: TextStyle(color: CupertinoColors.systemBlue),
                         ),
+                        onPressed: () {
+                          Navigator.pop(context); // Quay lại màn hình đăng nhập
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -90,20 +150,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
-
-   void _showSuccessDialog(BuildContext context) {
+  void _showSuccessDialog(BuildContext context) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           title: const Text('Thành công'),
           content: const Text('Vui lòng kiểm tra email của bạn để được hướng dẫn đặt lại mật khẩu.'),
-          actions: <Widget>[
+          actions: [
             CupertinoDialogAction(
               child: const Text('OK'),
               onPressed: () {
-                Navigator.of(context).pop();  // Dismiss the dialog
-                Navigator.of(context).pop();  // Go back to the previous screen
+                Navigator.of(context).pop(); // Đóng dialog
+                Navigator.pop(context); // Quay lại màn hình đăng nhập
               },
             ),
           ],
@@ -112,14 +171,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
-    void _showErrorDialog(BuildContext context, String errorMessage) {
+  void _showErrorDialog(BuildContext context, String errorMessage) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           title: const Text('Lỗi'),
-          content: Text('Không thể gửi email đặt lại: $errorMessage'),
-          actions: <Widget>[
+          content: Text('Không thể gửi yêu cầu: $errorMessage'),
+          actions: [
             CupertinoDialogAction(
               child: const Text('OK'),
               onPressed: () {

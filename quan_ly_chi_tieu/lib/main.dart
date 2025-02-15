@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ExpenseProvider(),
       child: CupertinoApp(
+        debugShowCheckedModeBanner: false, // Tắt chữ "DEBUG"
         theme: const CupertinoThemeData(
           primaryColor: CupertinoColors.systemTeal,
           brightness: Brightness.light,
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           if (settings.name == '/home') {
             return CupertinoPageRoute(builder: (context) => const HomeScreen());
           } else if (settings.name == '/login') {
-            return CupertinoPageRoute(builder: (context) => const LoginScreen());
+            return CupertinoPageRoute(
+                builder: (context) => const LoginScreen());
           }
           return null;
         },
