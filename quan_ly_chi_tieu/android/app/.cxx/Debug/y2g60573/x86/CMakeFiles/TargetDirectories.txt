@@ -1,0 +1,2 @@
+C:/Users/duong/.vscode/MobileAppDev_N05_GR06/quan_ly_chi_tieu/android/app/.cxx/Debug/y2g60573/x86/CMakeFiles/edit_cache.dir
+C:/Users/duong/.vscode/MobileAppDev_N05_GR06/quan_ly_chi_tieu/android/app/.cxx/Debug/y2g60573/x86/CMakeFiles/rebuild_cache.dir

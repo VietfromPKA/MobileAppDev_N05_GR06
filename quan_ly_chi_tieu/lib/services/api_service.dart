@@ -6,13 +6,13 @@ import 'package:flutter/foundation.dart'; // Import for kDebugMode
 class ApiService {
   // Your API URL  -  CHANGE THIS!
   
-  //Duong
-  // final String baseUrl =
-  //     'http://192.168.102.17:3000'; 
-
-  // Viet
+  // Duong
   final String baseUrl =
-      'http://192.168.1.3:3000'; 
+      'http://192.168.102.17:3000'; 
+
+  // // Viet
+  // final String baseUrl =
+  //     'http://192.168.1.3:3000'; 
 
   Future<List<Expense>> getAllExpenses() async {
     try {

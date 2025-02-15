@@ -1,92 +1,38 @@
+// screens/settings/settings_screen.dart
+
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:quan_ly_chi_tieu/services/auth_service.dart';
-import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
+import 'package:quan_ly_chi_tieu/screens/settings/profile_screen.dart'; // Import ProfileScreen
+import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart';  // Import trang login
 
 class SettingsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final email = Provider.of<ExpenseProvider>(context).email;
+  const SettingsScreen({Key? key}) : super(key: key);
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Cài đặt'),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Thông tin cá nhân',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: CupertinoColors.black,
-              ),
-            ),
-            SizedBox(height: 10),
-            Container(
-              decoration: BoxDecoration(
-                color: CupertinoColors.white,
-                borderRadius: BorderRadius.circular(15.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: CupertinoColors.systemGrey.withOpacity(0.3),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  CupertinoListTile(
-                    leading: Icon(CupertinoIcons.mail_solid, color: CupertinoColors.activeBlue),
-                    title: Text('Email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    subtitle: Text(email ?? '', style: TextStyle(fontSize: 16, color: CupertinoColors.systemGrey)),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            CupertinoButton.filled(
-              onPressed: () async {
-                try {
-                  await AuthService().logout();
-                  Navigator.pushReplacementNamed(context, '/login');
-                } catch (e) {
-                  _showErrorDialog(context, e.toString());
-                }
-              },
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              borderRadius: BorderRadius.circular(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(CupertinoIcons.square_arrow_right, color: CupertinoColors.white),
-                  SizedBox(width: 5),
-                  Text('Đăng xuất', style: TextStyle(fontSize: 18)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showErrorDialog(BuildContext context, String errorMessage) {
+  void _showLogoutConfirmation(BuildContext context) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-          title: const Text('Lỗi'),
-          content: Text('Đăng xuất không thành công: $errorMessage'),
+          title: const Text('Đăng xuất'),
+          content: const Text('Bạn có chắc chắn muốn đăng xuất?'),
           actions: <Widget>[
             CupertinoDialogAction(
-              child: const Text('OK'),
+              child: const Text('Hủy'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // Đóng hộp thoại
+              },
+            ),
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              child: const Text('Đăng xuất'),
+              onPressed: () {
+                // TODO: Xử lý đăng xuất (xóa token, dữ liệu người dùng, v.v.)
+                // Sau khi đăng xuất, chuyển hướng về màn hình đăng nhập
+                Navigator.of(context).pop(); // Đóng hộp thoại
+                 Navigator.pushAndRemoveUntil(
+                  context,
+                  CupertinoPageRoute(builder: (context) => const LoginScreen()),
+                  (Route<dynamic> route) => false, // Xóa tất cả các màn hình trước đó
+                );
               },
             ),
           ],
@@ -94,35 +40,34 @@ class SettingsScreen extends StatelessWidget {
       },
     );
   }
-}
-
-class CupertinoListTile extends StatelessWidget {
-  final Widget leading;
-  final Widget title;
-  final Widget subtitle;
-
-  const CupertinoListTile({required this.leading, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          leading,
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                title,
-                SizedBox(height: 5),
-                subtitle,
-              ],
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Cài đặt'),
+      ),
+      child: SafeArea(
+        child: ListView(
+          children: [
+            CupertinoListTile(
+              title: const Text('Thông tin cá nhân'),
+              leading: const Icon(CupertinoIcons.person_circle),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) => const ProfileScreen()),
+                );
+              },
             ),
-          ),
-        ],
+            CupertinoListTile(
+              title: const Text('Đăng xuất', style: TextStyle(color: CupertinoColors.destructiveRed),),
+              leading: const Icon(CupertinoIcons.square_arrow_left, color:  CupertinoColors.destructiveRed,),
+              onTap: () => _showLogoutConfirmation(context), // Gọi hàm hiển thị xác nhận
+            ),
+            // Các tùy chọn cài đặt khác (nếu có)
+          ],
+        ),
       ),
     );
   }
