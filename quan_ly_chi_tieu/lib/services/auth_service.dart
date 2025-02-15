@@ -2,8 +2,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AuthService {
-  final String baseUrl = 'http://192.168.102.17:3000/auth';
+  // duong
+  // final String baseUrl = 'http://192.168.102.17:3000/auth';
 
+  //viet
+  final String baseUrl = 'http://192.168.1.3:3000/auth';
   static var userId; // Địa chỉ IP của máy tính
 
   Future<void> login(String email, String password, dynamic userId) async {
