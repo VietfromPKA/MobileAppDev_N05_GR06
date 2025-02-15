@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 32),
                   // Tiêu đề
                   const Text(
-                    'Chào mừng bạn đến với FINIKAA!',
+                    'Chào mừng bạn trở lại! ',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
