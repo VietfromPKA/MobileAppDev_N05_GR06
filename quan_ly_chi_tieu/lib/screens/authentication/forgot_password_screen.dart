@@ -150,6 +150,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 
+  // Hiển thị dialog thông báo thành công
   void _showSuccessDialog(BuildContext context) {
     showCupertinoDialog(
       context: context,

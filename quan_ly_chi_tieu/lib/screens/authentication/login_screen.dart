@@ -225,6 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+ // Hiển thị dialog thông báo lỗi
   void _showErrorDialog(BuildContext context, String errorMessage) {
     showCupertinoDialog(
       context: context,

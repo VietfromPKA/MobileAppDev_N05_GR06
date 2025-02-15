@@ -275,6 +275,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  //hàm để hiển thị dialog thành công
   void _showSuccessDialog(BuildContext context) {
     showCupertinoDialog(
       context: context,
@@ -295,7 +296,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
     );
   }
-
+    //hàm để hiển thị dialog lỗi
   void _showErrorDialog(BuildContext context, String errorMessage) {
     showCupertinoDialog(
       context: context,

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/models/expense.dart';
 import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
@@ -38,196 +39,342 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
     'Khác'
   ];
   final List<String> _types = ['Thu nhập', 'Chi tiêu'];
-    bool _isLoading = false; // Loading indicator state
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     if (widget.expense != null) {
       _titleController.text = widget.expense!.title;
-      _amountController.text = widget.expense!.amount.abs().toString(); // Use absolute value
+      _amountController.text = widget.expense!.amount.abs().toString();
       _selectedCategory = widget.expense!.category;
       _selectedType = widget.expense!.type;
-      _selectedDate = widget.expense!.date; // Initialize date
+      _selectedDate = widget.expense!.date;
     }
   }
-    @override
+
+  @override
   void dispose() {
     _titleController.dispose();
     _amountController.dispose();
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(  // Add this
-      onTap: () {
-        FocusScope.of(context)
-            .unfocus(); // Dismiss keyboard when tapping outside of text fields
-      },
-          child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              CupertinoTextFormFieldRow(
-                controller: _titleController,
-                placeholder: 'Tiêu đề',
-                prefix: const Icon(CupertinoIcons.textformat),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập tiêu đề';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-              CupertinoTextFormFieldRow(
-                controller: _amountController,
-                placeholder: 'Số tiền',
-                prefix: const Icon(CupertinoIcons.money_dollar),
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập số tiền';
-                  }
-                  try {
-                    double.parse(value);
-                  } catch (e) {
-                    return 'Số tiền phải là một số hợp lệ';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-               CupertinoFormRow(
-                prefix: const Text("Chọn loại giao dịch"),
-                child: CupertinoSlidingSegmentedControl<String>(  // Use CupertinoSlidingSegmentedControl
-                  children: {  // Build the segments
-                    for (final type in _types)
-                      type: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(type),
-                      ),
-                  },
-                  groupValue: _selectedType,  // The currently selected value
-                  onValueChanged: (String? newValue) { // Handle value changes
-                    setState(() {
-                      _selectedType = newValue;
-                    });
-                  },
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: CupertinoColors.systemBackground.resolveFrom(context),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _buildInputField(
+                      controller: _titleController,
+                      icon: CupertinoIcons.pencil_outline,
+                      label: 'Tiêu đề',
+                      placeholder: 'Nhập tiêu đề giao dịch',
+                    ),
+                    const SizedBox(height: 20),
+                    _buildInputField(
+                      controller: _amountController,
+                      icon: CupertinoIcons.money_dollar,
+                      label: 'Số tiền',
+                      placeholder: 'Nhập số tiền',
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 25),
+                    _buildTypeSelector(),
+                    const SizedBox(height: 25),
+                    _buildCategorySelector(),
+                    const SizedBox(height: 25),
+                    _buildDateSelector(),
+                    const SizedBox(height: 30),
+                    _buildSubmitButton(),
+                  ],
                 ),
               ),
-              const SizedBox(height: 16.0),
-              CupertinoFormRow(
-                prefix: const Text("Chọn phân loại"),
-                child: CupertinoPicker(
-                  magnification: 1.22,
-                  squeeze: 1.2,
-                  useMagnifier: true,
-                  itemExtent: 32.0,
-                  scrollController: FixedExtentScrollController(
-                    initialItem: _selectedCategory != null
-                        ? _categories.indexOf(_selectedCategory!)
-                        : 0,
-                  ),
-                  onSelectedItemChanged: (int selectedIndex) {
-                    setState(() {
-                      _selectedCategory = _categories[selectedIndex];
-                    });
-                  },
-                  children: List<Widget>.generate(_categories.length, (int index) {
-                    return Center(child: Text(_categories[index]));
-                  }),
-                ),
-              ),
-
-              const SizedBox(height: 16.0),
-                CupertinoFormRow( // Date Picker
-                prefix: const Text("Chọn ngày"),
-                child: CupertinoButton(
-
-                  child: Text(
-                    DateFormat('dd/MM/yyyy').format(_selectedDate), // Format the date
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  onPressed: () {
-                    _showDatePicker(context); // Show the date picker
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 32.0),
-
-              if (_isLoading)  // Show loading indicator
-                const CupertinoActivityIndicator()
-              else
-                CupertinoButton.filled(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-                  onPressed: () async {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      if (_selectedCategory == null) {
-                        _showErrorDialog(context, 'Vui lòng chọn phân loại');
-                        return;
-                      }
-                      if (_selectedType == null) {
-                        _showErrorDialog(
-                            context, 'Vui lòng chọn loại giao dịch');
-                        return;
-                      }
-                      final expense = Expense(
-                        id: widget.expense?.id ?? uuid.v4(),
-                        title: _titleController.text,
-                        amount: (_selectedType == "Chi tiêu")
-                            ? -double.parse(_amountController.text)
-                            : double.parse(_amountController.text),
-                        date: _selectedDate, // Use selected date
-                        category: _selectedCategory!,
-                        type: _selectedType!,
-                      );
-                        setState(() {
-                          _isLoading = true; // Show loading indicator
-                        });
-                      try {
-                        if (widget.expense == null) {
-                          // Add
-                          await Provider.of<ExpenseProvider>(context, listen: false)
-                              .addExpense(expense);
-                               if (mounted) Navigator.pop(context);
-                          _showSuccessDialog(context, true);
-                        }
-                        else {
-                              // Update
-                          await Provider.of<ExpenseProvider>(context, listen: false)
-                            .updateExpense(expense);
-                            if (mounted) Navigator.pop(context); // Go back after updating
-                            _showSuccessDialog(context, false);
-                        }
-
-                      } catch (e) {
-                        if(mounted) _showErrorDialog(context, e.toString());
-
-                      } finally {
-                        setState(() {
-                            _isLoading = false; // Hide loading indicator
-                        });
-                      }
-                    }
-                  },
-                  child: Text(widget.expense == null
-                      ? 'Thêm giao dịch'
-                      : 'Cập nhật giao dịch'), // Correct text
-                ),
-            ],
-          ),
+            ),
+            if (_isLoading) _buildLoadingOverlay(),
+          ],
         ),
       ),
     );
   }
 
-    void _showDatePicker(BuildContext context) {
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required IconData icon,
+    required String label,
+    required String placeholder,
+    TextInputType? keyboardType,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, bottom: 4),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 16,
+              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+            ),
+          ),
+        ),
+        CupertinoTextField(
+          controller: controller,
+          prefix: Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: Icon(icon, size: 20),
+          ),
+          placeholder: placeholder,
+          keyboardType: keyboardType,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: CupertinoColors.tertiarySystemFill.resolveFrom(context),
+            border: Border.all(color: CupertinoColors.opaqueSeparator),
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTypeSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+          child: Text(
+            'Loại giao dịch',
+            style: TextStyle(
+              fontSize: 16,
+              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+            ),
+          ),
+        ),
+        Row(
+          children: _types.map((type) => Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: CupertinoButton(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                color: _selectedType == type 
+                    ? (type == 'Thu nhập' 
+                        ? CupertinoColors.activeGreen 
+                        : CupertinoColors.systemRed)
+                    : CupertinoColors.tertiarySystemFill,
+                borderRadius: BorderRadius.circular(8),
+                child: Text(
+                  type,
+                  style: TextStyle(
+                    color: _selectedType == type
+                        ? CupertinoColors.white
+                        : CupertinoColors.label.resolveFrom(context),
+                  ),
+                ),
+                onPressed: () => setState(() => _selectedType = type),
+              ),
+            ),
+          )).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategorySelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+          child: Text(
+            'Phân loại',
+            style: TextStyle(
+              fontSize: 16,
+              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+            ),
+          ),
+        ),
+        CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: _showCategoryPicker,
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: CupertinoColors.tertiarySystemFill.resolveFrom(context),
+              border: Border.all(color: CupertinoColors.opaqueSeparator),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                Icon(_getCategoryIcon(_selectedCategory), size: 20),
+                const SizedBox(width: 12),
+                Text(
+                  _selectedCategory ?? 'Chọn phân loại',
+                  style: TextStyle(
+                    color: _selectedCategory == null
+                        ? CupertinoColors.placeholderText.resolveFrom(context)
+                        : CupertinoColors.label.resolveFrom(context),
+                  ),
+                ),
+                const Spacer(),
+                const Icon(CupertinoIcons.chevron_down, size: 16),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDateSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+          child: Text(
+            'Ngày giao dịch',
+            style: TextStyle(
+              fontSize: 16,
+              color: CupertinoColors.secondaryLabel.resolveFrom(context),
+            ),
+          ),
+        ),
+        CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: () => _showDatePicker(context),
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: CupertinoColors.tertiarySystemFill.resolveFrom(context),
+              border: Border.all(color: CupertinoColors.opaqueSeparator),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                const Icon(CupertinoIcons.calendar, size: 20),
+                const SizedBox(width: 12),
+                Text(
+                  DateFormat('dd/MM/yyyy').format(_selectedDate),
+                ),
+                const Spacer(),
+                const Icon(CupertinoIcons.chevron_forward, size: 16),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSubmitButton() {
+    return CupertinoButton(
+      color: CupertinoColors.activeBlue,
+      borderRadius: BorderRadius.circular(10),
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      onPressed: _submitForm,
+      child: Text(
+        widget.expense == null ? 'Thêm giao dịch' : 'Cập nhật giao dịch',
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingOverlay() {
+    return Container(
+      color: CupertinoColors.systemBackground.withOpacity(0.8),
+      child: const Center(
+        child: CupertinoActivityIndicator(radius: 14),
+      ),
+    );
+  }
+
+  IconData _getCategoryIcon(String? category) {
+    switch (category) {
+      case 'Ăn uống':
+        return CupertinoIcons.bag_fill;
+      case 'Nhà cửa':
+        return CupertinoIcons.house_fill;
+      case 'Xe cộ':
+        return CupertinoIcons.car_detailed;
+      case 'Làm đẹp':
+        return CupertinoIcons.heart_fill;
+      case 'Quần áo':
+        return CupertinoIcons.bag_fill;
+      case 'Du lịch':
+        return CupertinoIcons.airplane;
+      case 'Lương':
+        return CupertinoIcons.money_dollar_circle_fill;
+      case 'Học phí':
+        return CupertinoIcons.book_fill;
+      case 'Di chuyển':
+        return CupertinoIcons.car_detailed;
+      case 'Giải trí':
+        return CupertinoIcons.game_controller;
+      case 'Sức khỏe':
+        return CupertinoIcons.heart_fill;
+      case 'Khác':
+        return CupertinoIcons.question_circle_fill;
+      default:
+        return CupertinoIcons.tag;
+    }
+  }
+
+  void _showCategoryPicker() {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (_) => Container(
+        height: MediaQuery.of(context).size.height * 0.4, // Giới hạn chiều cao
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3, // Chiều cao cho Picker
+              child: CupertinoPicker(
+                itemExtent: 40,
+                onSelectedItemChanged: (index) {
+                  setState(() => _selectedCategory = _categories[index]);
+                },
+                children: _categories.map((category) => Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(_getCategoryIcon(category), size: 20),
+                      const SizedBox(width: 8),
+                      Text(category),
+                    ],
+                  ),
+                )).toList(),
+              ),
+            ),
+            CupertinoButton(
+              child: const Text('Xong'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDatePicker(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
@@ -242,7 +389,7 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
             top: false,
             child: CupertinoDatePicker(
               initialDateTime: _selectedDate,
-              mode: CupertinoDatePickerMode.date, // Choose date mode
+              mode: CupertinoDatePickerMode.date,
               onDateTimeChanged: (DateTime newDate) {
                 setState(() {
                   _selectedDate = newDate;
@@ -251,7 +398,49 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
             ),
           ),
         );
-      });
+      },
+    );
+  }
+
+  void _submitForm() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      if (_selectedCategory == null) {
+        _showErrorDialog(context, 'Vui lòng chọn phân loại');
+        return;
+      }
+      if (_selectedType == null) {
+        _showErrorDialog(context, 'Vui lòng chọn loại giao dịch');
+        return;
+      }
+      final expense = Expense(
+        id: widget.expense?.id ?? uuid.v4(),
+        title: _titleController.text,
+        amount: (_selectedType == "Chi tiêu")
+            ? -double.parse(_amountController.text)
+            : double.parse(_amountController.text),
+        date: _selectedDate,
+        category: _selectedCategory!,
+        type: _selectedType!,
+      );
+      setState(() => _isLoading = true);
+      try {
+        if (widget.expense == null) {
+          await Provider.of<ExpenseProvider>(context, listen: false)
+              .addExpense(expense);
+          if (mounted) Navigator.pop(context);
+          _showSuccessDialog(context, true);
+        } else {
+          await Provider.of<ExpenseProvider>(context, listen: false)
+              .updateExpense(expense);
+          if (mounted) Navigator.pop(context);
+          _showSuccessDialog(context, false);
+        }
+      } catch (e) {
+        if (mounted) _showErrorDialog(context, e.toString());
+      } finally {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 
   void _showErrorDialog(BuildContext context, String errorMessage) {
@@ -264,28 +453,25 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
           actions: <Widget>[
             CupertinoDialogAction(
               child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );
       },
     );
-}
- void _showSuccessDialog(BuildContext context, bool isAdd) {
+  }
+
+  void _showSuccessDialog(BuildContext context, bool isAdd) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           title: const Text('Thành công'),
-          content:  Text(isAdd ? 'Thêm giao dịch thành công!' : 'Cập nhật giao dịch thành công'),
+          content: Text(isAdd ? 'Thêm giao dịch thành công!' : 'Cập nhật giao dịch thành công'),
           actions: <Widget>[
             CupertinoDialogAction(
               child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
-              },
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );
