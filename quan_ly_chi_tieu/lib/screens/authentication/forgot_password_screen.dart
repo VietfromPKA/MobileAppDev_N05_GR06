@@ -75,9 +75,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       placeholder: 'Email',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.mail, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.mail,
+                            color: CupertinoColors.systemGrey),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
                         border: Border.all(color: CupertinoColors.systemGrey4),
@@ -97,7 +99,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           ? const CupertinoActivityIndicator()
                           : const Text(
                               'Gửi yêu cầu',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                       onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
@@ -105,7 +108,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             _isLoading = true;
                           });
                           try {
-                            await AuthService().forgotPassword(_emailController.text);
+                            await AuthService()
+                                .forgotPassword(_emailController.text);
                             // Show success dialog
                             _showSuccessDialog(context);
                           } catch (e) {
@@ -156,7 +160,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           title: const Text('Thành công'),
-          content: const Text('Vui lòng kiểm tra email của bạn để được hướng dẫn đặt lại mật khẩu.'),
+          content: const Text(
+              'Vui lòng kiểm tra email của bạn để được hướng dẫn đặt lại mật khẩu.'),
           actions: [
             CupertinoDialogAction(
               child: const Text('OK'),

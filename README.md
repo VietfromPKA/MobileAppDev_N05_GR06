@@ -15,13 +15,40 @@ Dự án được thực hiện bởi nhóm gồm 3 thành viên với sự hư�
 - **Nguyễn Đức Quốc** - 22010234  
 - **Nguyễn Văn Dương** - 22010019  
 
-## 📂 Nội dung chính  
+## 📂 Đề Tài
+Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
 
-Class Diagram
+## Mô tả Project
+### Công nghệ sử dụng
+- Ngôn ngữ lập trình: Dart
+- Famework: Flutter
+
+## Tính năng chính
+- Đăng ký, đăng nhập, đăng xuất
+- Quên mật khẩu, thay đổi mật khẩu
+- Thêm, xóa chi tiêu
+- Hiển thị danh sách chi tiêu
+- Xem thống kê, báo cáo khoản chi tiêu theo biểu đồ và khoảng thời gian nhất định
+- Thay đổi thông tin cá nhân
+
+## Danh sách các màn hình
+<p float = "left">
+  <img src="quan_ly_chi_tieu/assets/images/DangKy.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/DangNhap.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/QuenMatKhau.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Chitieu.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Themchitieu.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Thongke.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Lich.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/chitietgiaodich.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/caidat.png" width="200">
+
+## Class Diagram
 ![Class Diagram](qly_chi_tieu/assets/images/UML.drawio.png)
 
-Demo sơ đồ Use-case:
+## Demo sơ đồ Use-case:
 ![Sơ đồ UC](qly_chi_tieu/assets/images/UC.drawio.png)
+</p>
 
-Screenshor myfirst_App
-![main screen](qly_chi_tieu/assets/images/appbar.png)
+
+

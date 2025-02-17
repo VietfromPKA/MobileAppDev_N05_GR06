@@ -165,29 +165,31 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
           ),
         ),
         Row(
-          children: _types.map((type) => Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: CupertinoButton(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                color: _selectedType == type 
-                    ? (type == 'Thu nhập' 
-                        ? CupertinoColors.activeGreen 
-                        : CupertinoColors.systemRed)
-                    : CupertinoColors.tertiarySystemFill,
-                borderRadius: BorderRadius.circular(8),
-                child: Text(
-                  type,
-                  style: TextStyle(
-                    color: _selectedType == type
-                        ? CupertinoColors.white
-                        : CupertinoColors.label.resolveFrom(context),
-                  ),
-                ),
-                onPressed: () => setState(() => _selectedType = type),
-              ),
-            ),
-          )).toList(),
+          children: _types
+              .map((type) => Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: CupertinoButton(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        color: _selectedType == type
+                            ? (type == 'Thu nhập'
+                                ? CupertinoColors.activeGreen
+                                : CupertinoColors.systemRed)
+                            : CupertinoColors.tertiarySystemFill,
+                        borderRadius: BorderRadius.circular(8),
+                        child: Text(
+                          type,
+                          style: TextStyle(
+                            color: _selectedType == type
+                                ? CupertinoColors.white
+                                : CupertinoColors.label.resolveFrom(context),
+                          ),
+                        ),
+                        onPressed: () => setState(() => _selectedType = type),
+                      ),
+                    ),
+                  ))
+              .toList(),
         ),
       ],
     );
@@ -345,22 +347,25 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.3, // Chiều cao cho Picker
+              height: MediaQuery.of(context).size.height *
+                  0.3, // Chiều cao cho Picker
               child: CupertinoPicker(
                 itemExtent: 40,
                 onSelectedItemChanged: (index) {
                   setState(() => _selectedCategory = _categories[index]);
                 },
-                children: _categories.map((category) => Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(_getCategoryIcon(category), size: 20),
-                      const SizedBox(width: 8),
-                      Text(category),
-                    ],
-                  ),
-                )).toList(),
+                children: _categories
+                    .map((category) => Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(_getCategoryIcon(category), size: 20),
+                              const SizedBox(width: 8),
+                              Text(category),
+                            ],
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
             CupertinoButton(
@@ -466,7 +471,9 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
           title: const Text('Thành công'),
-          content: Text(isAdd ? 'Thêm giao dịch thành công!' : 'Cập nhật giao dịch thành công'),
+          content: Text(isAdd
+              ? 'Thêm giao dịch thành công!'
+              : 'Cập nhật giao dịch thành công'),
           actions: <Widget>[
             CupertinoDialogAction(
               child: const Text('OK'),

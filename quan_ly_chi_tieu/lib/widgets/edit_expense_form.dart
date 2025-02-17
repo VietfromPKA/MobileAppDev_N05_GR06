@@ -12,10 +12,11 @@ class EditExpenseForm extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: const Text('Chỉnh sửa giao dịch'), // Vietnamese title
-         // Add back button
+        // Add back button
         leading: CupertinoNavigationBarBackButton(
-            onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil('/home_screen', (Route<dynamic> route) => false); // Go back to the home screen
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil('/home_screen',
+                (Route<dynamic> route) => false); // Go back to the home screen
           },
         ),
       ),
