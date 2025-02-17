@@ -4,10 +4,14 @@ import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
   // duong
-  final String baseUrl = 'http://192.168.102.17:3000/auth';
+  //final String baseUrl = 'http://192.168.102.17:3000/auth';
 
   // viet
-  // final String baseUrl = 'http://192.168.1.3:3000/auth';
+  //final String baseUrl = 'http://192.168.1.3:3000/auth';
+
+  //phenikaa
+  final String baseUrl = 'http://10.6.136.186:3000/auth';
+
   static User? currentUser; // Thông tin người dùng hiện tại
 
   Future<void> login(String email, String password) async {
