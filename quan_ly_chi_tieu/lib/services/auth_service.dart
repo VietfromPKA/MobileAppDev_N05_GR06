@@ -4,7 +4,7 @@ import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
   // duong
-  final String baseUrl = 'http://192.168.102.17:3000/auth';
+  final String baseUrl = 'http://10.6.136.126:3000/auth';
 
   // viet
   // final String baseUrl = 'http://192.168.1.3:3000/auth';
@@ -21,9 +21,12 @@ class AuthService {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      String userId = responseData['user']['id'] ?? ''; // Cung cấp giá trị mặc định nếu userId là null
-      String userEmail = responseData['user']['email'] ?? 'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
-      String userUsername = responseData['user']['username'] ?? 'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
+      String userId = responseData['user']['id'] ??
+          ''; // Cung cấp giá trị mặc định nếu userId là null
+      String userEmail = responseData['user']['email'] ??
+          'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
+      String userUsername = responseData['user']['username'] ??
+          'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
       currentUser = User(
         id: userId,
         email: userEmail,
@@ -46,14 +49,18 @@ class AuthService {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({'email': email, 'password': password, 'username': username}),
+      body: jsonEncode(
+          {'email': email, 'password': password, 'username': username}),
     );
 
     if (response.statusCode == 201) {
       final responseData = jsonDecode(response.body);
-      String userId = responseData['user']['id'] ?? ''; // Cung cấp giá trị mặc định nếu userId là null
-      String userEmail = responseData['user']['email'] ?? 'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
-      String userUsername = responseData['user']['username'] ?? 'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
+      String userId = responseData['user']['id'] ??
+          ''; // Cung cấp giá trị mặc định nếu userId là null
+      String userEmail = responseData['user']['email'] ??
+          'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
+      String userUsername = responseData['user']['username'] ??
+          'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
       currentUser = User(
         id: userId,
         email: userEmail,
@@ -115,7 +122,8 @@ class AuthService {
     );
 
     if (response.statusCode == 200) {
-      currentUser = null; // Xóa thông tin người dùng sau khi đăng xuất thành công
+      currentUser =
+          null; // Xóa thông tin người dùng sau khi đăng xuất thành công
     } else {
       try {
         final responseBody = response.body;
@@ -123,7 +131,8 @@ class AuthService {
           throw Exception('Server returned an HTML response');
         }
         final responseData = jsonDecode(response.body);
-        throw Exception('Failed to logout: ${responseData['message']} - Response: $responseBody');
+        throw Exception(
+            'Failed to logout: ${responseData['message']} - Response: $responseBody');
       } catch (e) {
         throw Exception('Failed to logout: $e');
       }
