@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -13,7 +12,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController(); // Thêm controller cho nhập lại mật khẩu
+  final _confirmPasswordController =
+      TextEditingController(); // Thêm controller cho nhập lại mật khẩu
   final _usernameController = TextEditingController();
   bool _isLoading = false;
   bool _obscureText = true; // Password visibility
@@ -80,9 +80,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       placeholder: 'Email',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.mail, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.mail,
+                            color: CupertinoColors.systemGrey),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
                         border: Border.all(color: CupertinoColors.systemGrey4),
@@ -110,9 +112,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       placeholder: 'Username',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.person, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.person,
+                            color: CupertinoColors.systemGrey),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
                         border: Border.all(color: CupertinoColors.systemGrey4),
@@ -139,12 +143,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       placeholder: 'Mật khẩu',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.lock, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.lock,
+                            color: CupertinoColors.systemGrey),
                       ),
                       suffix: CupertinoButton(
                         padding: EdgeInsets.zero,
                         child: Icon(
-                          _obscureText ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
+                          _obscureText
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash,
                           color: CupertinoColors.systemGrey,
                         ),
                         onPressed: () {
@@ -153,7 +160,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           });
                         },
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       obscureText: _obscureText,
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
@@ -181,12 +189,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       placeholder: 'Nhập Lại Mật khẩu',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.lock, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.lock,
+                            color: CupertinoColors.systemGrey),
                       ),
                       suffix: CupertinoButton(
                         padding: EdgeInsets.zero,
                         child: Icon(
-                          _obscureText ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
+                          _obscureText
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash,
                           color: CupertinoColors.systemGrey,
                         ),
                         onPressed: () {
@@ -195,7 +206,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           });
                         },
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       obscureText: _obscureText,
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
@@ -215,12 +227,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ? const CupertinoActivityIndicator()
                           : const Text(
                               'Đăng ký',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                       onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
-                          if (_passwordController.text != _confirmPasswordController.text) {
-                            _showErrorDialog(context, 'Mật khẩu nhập lại không khớp');
+                          if (_passwordController.text !=
+                              _confirmPasswordController.text) {
+                            _showErrorDialog(
+                                context, 'Mật khẩu nhập lại không khớp');
                             return;
                           }
                           setState(() {
@@ -296,7 +311,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
     );
   }
-    //hàm để hiển thị dialog lỗi
+
+  //hàm để hiển thị dialog lỗi
   void _showErrorDialog(BuildContext context, String errorMessage) {
     showCupertinoDialog(
       context: context,

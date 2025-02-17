@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/register_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/forgot_password_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
@@ -79,9 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       placeholder: 'Email',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.mail, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.mail,
+                            color: CupertinoColors.systemGrey),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
                         border: Border.all(color: CupertinoColors.systemGrey4),
@@ -109,12 +110,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       placeholder: 'Mật khẩu',
                       prefix: const Padding(
                         padding: EdgeInsets.only(left: 8.0),
-                        child: Icon(CupertinoIcons.lock, color: CupertinoColors.systemGrey),
+                        child: Icon(CupertinoIcons.lock,
+                            color: CupertinoColors.systemGrey),
                       ),
                       suffix: CupertinoButton(
                         padding: EdgeInsets.zero,
                         child: Icon(
-                          _obscureText ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
+                          _obscureText
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash,
                           color: CupertinoColors.systemGrey,
                         ),
                         onPressed: () {
@@ -123,7 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         },
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
                       obscureText: _obscureText,
                       decoration: BoxDecoration(
                         color: CupertinoColors.systemBackground,
@@ -163,7 +168,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? const CupertinoActivityIndicator()
                           : const Text(
                               'Đăng nhập',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                       onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
@@ -225,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
- // Hiển thị dialog thông báo lỗi
+  // Hiển thị dialog thông báo lỗi
   void _showErrorDialog(BuildContext context, String errorMessage) {
     showCupertinoDialog(
       context: context,

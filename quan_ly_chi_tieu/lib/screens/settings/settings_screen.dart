@@ -2,10 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:quan_ly_chi_tieu/screens/settings/profile_screen.dart'; // Import ProfileScreen
-import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart';  // Import trang login
+import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart'; // Import trang login
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   void _showLogoutConfirmation(BuildContext context) {
     showCupertinoDialog(
@@ -28,10 +28,11 @@ class SettingsScreen extends StatelessWidget {
                 // TODO: Xử lý đăng xuất (xóa token, dữ liệu người dùng, v.v.)
                 // Sau khi đăng xuất, chuyển hướng về màn hình đăng nhập
                 Navigator.of(context).pop(); // Đóng hộp thoại
-                 Navigator.pushAndRemoveUntil(
+                Navigator.pushAndRemoveUntil(
                   context,
                   CupertinoPageRoute(builder: (context) => const LoginScreen()),
-                  (Route<dynamic> route) => false, // Xóa tất cả các màn hình trước đó
+                  (Route<dynamic> route) =>
+                      false, // Xóa tất cả các màn hình trước đó
                 );
               },
             ),
@@ -56,14 +57,22 @@ class SettingsScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  CupertinoPageRoute(builder: (context) => const ProfileScreen()),
+                  CupertinoPageRoute(
+                      builder: (context) => const ProfileScreen()),
                 );
               },
             ),
             CupertinoListTile(
-              title: const Text('Đăng xuất', style: TextStyle(color: CupertinoColors.destructiveRed),),
-              leading: const Icon(CupertinoIcons.square_arrow_left, color:  CupertinoColors.destructiveRed,),
-              onTap: () => _showLogoutConfirmation(context), // Gọi hàm hiển thị xác nhận
+              title: const Text(
+                'Đăng xuất',
+                style: TextStyle(color: CupertinoColors.destructiveRed),
+              ),
+              leading: const Icon(
+                CupertinoIcons.square_arrow_left,
+                color: CupertinoColors.destructiveRed,
+              ),
+              onTap: () =>
+                  _showLogoutConfirmation(context), // Gọi hàm hiển thị xác nhận
             ),
             // Các tùy chọn cài đặt khác (nếu có)
           ],

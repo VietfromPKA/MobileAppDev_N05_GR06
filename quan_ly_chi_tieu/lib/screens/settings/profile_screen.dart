@@ -3,7 +3,7 @@ import 'package:quan_ly_chi_tieu/services/auth_service.dart'; // Import AuthServ
 import 'package:quan_ly_chi_tieu/models/user.dart'; // Import User model
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -26,7 +26,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _loadUserData() async {
     try {
-      final userData = AuthService.currentUser; // Lấy thông tin người dùng hiện tại từ AuthService
+      final userData = AuthService
+          .currentUser; // Lấy thông tin người dùng hiện tại từ AuthService
       if (userData != null) {
         _usernameController.text = userData.username;
         _emailController.text = userData.email;
@@ -47,7 +48,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         password: AuthService.currentUser!.password, // Giữ nguyên mật khẩu
       );
 
-      await AuthService().updateUser(updatedUser); // Gọi API để cập nhật thông tin người dùng
+      await AuthService()
+          .updateUser(updatedUser); // Gọi API để cập nhật thông tin người dùng
       setState(() {
         _isEditing = false; // Tắt chế độ chỉnh sửa sau khi lưu
       });
@@ -105,8 +107,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         trailing: _isEditing
             ? CupertinoButton(
                 padding: EdgeInsets.zero,
-                child: const Text('Lưu'),
                 onPressed: _saveUserData,
+                child: const Text('Lưu'),
               )
             : CupertinoButton(
                 padding: EdgeInsets.zero,
@@ -125,7 +127,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CupertinoTextField(
               controller: _usernameController,
               placeholder: 'Tên người dùng',
-              decoration: _isEditing ? null : const BoxDecoration(border: Border()), //Ẩn/hiện border
+              decoration: _isEditing
+                  ? null
+                  : const BoxDecoration(border: Border()), //Ẩn/hiện border
               padding: const EdgeInsets.all(12),
               readOnly: !_isEditing, //Chỉ đọc khi không chỉnh sửa
             ),
@@ -133,9 +137,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             CupertinoTextField(
               controller: _emailController,
               placeholder: 'Email',
-              decoration: _isEditing ? null : const BoxDecoration(border: Border()),  //Ẩn/hiện border
+              decoration: _isEditing
+                  ? null
+                  : const BoxDecoration(border: Border()), //Ẩn/hiện border
               padding: const EdgeInsets.all(12),
-              readOnly: !_isEditing,  //Chỉ đọc khi không chỉnh sửa
+              readOnly: !_isEditing, //Chỉ đọc khi không chỉnh sửa
               keyboardType: TextInputType.emailAddress,
             ),
             // Các trường thông tin khác (nếu cần)

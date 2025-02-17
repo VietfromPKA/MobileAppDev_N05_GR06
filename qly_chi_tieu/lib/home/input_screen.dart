@@ -24,7 +24,7 @@ class _InputScreenState extends State<InputScreen> {
       'Th 4',
       'Th 5',
       'Th 6',
-      'Th 7'
+      'Th 7',
     ];
     return '${date.day}/${date.month}/${date.year} (${weekDays[date.weekday % 7]})';
   }
@@ -37,7 +37,7 @@ class _InputScreenState extends State<InputScreen> {
       firstDate: DateTime(2000), // Ngày bắt đầu
       lastDate: DateTime(2100), // Ngày kết thúc
     );
-    if (picked != null && picked != selectedDate) {
+    if (picked != selectedDate) {
       setState(() {
         selectedDate = picked; // Cập nhật ngày đã chọn
       });
@@ -59,17 +59,20 @@ class _InputScreenState extends State<InputScreen> {
                 });
               },
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: selectedType == 'Chi' ? Colors.white : Colors.black,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   'Tiền chi',
-                  style: selectedType == 'Chi'
-                      ? const TextStyle(color: Colors.black)
-                      : const TextStyle(color: Colors.white),
+                  style:
+                      selectedType == 'Chi'
+                          ? const TextStyle(color: Colors.black)
+                          : const TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -82,17 +85,20 @@ class _InputScreenState extends State<InputScreen> {
                 });
               },
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: selectedType == 'Thu' ? Colors.white : Colors.black,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   'Tiền thu',
-                  style: selectedType == 'Thu'
-                      ? const TextStyle(color: Colors.black)
-                      : const TextStyle(color: Colors.white),
+                  style:
+                      selectedType == 'Thu'
+                          ? const TextStyle(color: Colors.black)
+                          : const TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -108,15 +114,19 @@ class _InputScreenState extends State<InputScreen> {
             // Phần chọn ngày
             Row(
               children: [
-                const Text('Ngày',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
+                const Text(
+                  'Ngày',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: GestureDetector(
                     onTap: _selectDate,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 16),
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(8),
@@ -128,8 +138,11 @@ class _InputScreenState extends State<InputScreen> {
                             formatDate(selectedDate),
                             style: const TextStyle(color: Colors.white),
                           ),
-                          const Icon(Icons.calendar_today,
-                              color: Colors.white, size: 16),
+                          const Icon(
+                            Icons.calendar_today,
+                            color: Colors.white,
+                            size: 16,
+                          ),
                         ],
                       ),
                     ),
@@ -163,100 +176,118 @@ class _InputScreenState extends State<InputScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text('Danh mục',
-                style: TextStyle(fontSize: 14, color: Colors.white)),
+            const Text(
+              'Danh mục',
+              style: TextStyle(fontSize: 14, color: Colors.white),
+            ),
             const SizedBox(height: 10),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 4,
                 crossAxisSpacing: 4,
                 mainAxisSpacing: 4,
-                children: selectedType == 'Chi'
-                    ? [
-                        _buildCategoryButton(Icons.fastfood, 'Ăn uống'),
-                        _buildCategoryButton(
-                            Icons.shopping_bag, 'Chi tiêu hàng ngày'),
-                        _buildCategoryButton(Icons.checkroom, 'Quần áo'),
-                        _buildCategoryButton(Icons.face, 'Mỹ phẩm'),
-                        _buildCategoryButton(Icons.local_bar, 'Phí giao lưu'),
-                        _buildCategoryButton(Icons.local_hospital, 'Y tế'),
-                        _buildCategoryButton(Icons.school, 'Giáo dục'),
-                        _buildCategoryButton(Icons.water, 'Tiền điện'),
-                        _buildCategoryButton(Icons.directions_bus, 'Đi lại'),
-                        _buildCategoryButton(Icons.phone, 'Phí liên lạc'),
-                        _buildCategoryButton(Icons.home, 'Tiền nhà'),
-                        GestureDetector(
-                          onTap: () async {
-                            final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const NewCategoryScreen(),
+                children:
+                    selectedType == 'Chi'
+                        ? [
+                          _buildCategoryButton(Icons.fastfood, 'Ăn uống'),
+                          _buildCategoryButton(
+                            Icons.shopping_bag,
+                            'Chi tiêu hàng ngày',
+                          ),
+                          _buildCategoryButton(Icons.checkroom, 'Quần áo'),
+                          _buildCategoryButton(Icons.face, 'Mỹ phẩm'),
+                          _buildCategoryButton(Icons.local_bar, 'Phí giao lưu'),
+                          _buildCategoryButton(Icons.local_hospital, 'Y tế'),
+                          _buildCategoryButton(Icons.school, 'Giáo dục'),
+                          _buildCategoryButton(Icons.water, 'Tiền điện'),
+                          _buildCategoryButton(Icons.directions_bus, 'Đi lại'),
+                          _buildCategoryButton(Icons.phone, 'Phí liên lạc'),
+                          _buildCategoryButton(Icons.home, 'Tiền nhà'),
+                          GestureDetector(
+                            onTap: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const NewCategoryScreen(),
+                                ),
+                              );
+                              if (result != null) {
+                                setState(() {
+                                  categoryName = result['name'];
+                                  selectedCategoryIcon = result['icon'];
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[900],
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            );
-                            if (result != null) {
-                              setState(() {
-                                categoryName = result['name'];
-                                selectedCategoryIcon = result['icon'];
-                              });
-                            }
-                          },
-                          child: Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[900],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.add,
-                                size: 30,
-                                color: Colors.orange,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Colors.orange,
+                                ),
                               ),
                             ),
                           ),
-                        
-                        ),
-                      ]
-                    : [
-                        _buildCategoryButton(Icons.attach_money, 'Tiền lương'),
-                        _buildCategoryButton(Icons.card_giftcard, 'Phụ cấp'),
-                        _buildCategoryButton(Icons.emoji_events, 'Tiền thưởng'),
-                        _buildCategoryButton(Icons.add_circle, 'Thu nhập phụ'),
-                        _buildCategoryButton(Icons.trending_up, 'Đầu tư'),
-                        _buildCategoryButton(Icons.inbox, 'Thu nhập tạm thời'),
-                        GestureDetector(
-                          onTap: () async {
-                            final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const NewCategoryScreen(),
+                        ]
+                        : [
+                          _buildCategoryButton(
+                            Icons.attach_money,
+                            'Tiền lương',
+                          ),
+                          _buildCategoryButton(Icons.card_giftcard, 'Phụ cấp'),
+                          _buildCategoryButton(
+                            Icons.emoji_events,
+                            'Tiền thưởng',
+                          ),
+                          _buildCategoryButton(
+                            Icons.add_circle,
+                            'Thu nhập phụ',
+                          ),
+                          _buildCategoryButton(Icons.trending_up, 'Đầu tư'),
+                          _buildCategoryButton(
+                            Icons.inbox,
+                            'Thu nhập tạm thời',
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) => const NewCategoryScreen(),
+                                ),
+                              );
+                              if (result != null) {
+                                setState(() {
+                                  categoryName = result['name'];
+                                  selectedCategoryIcon = result['icon'];
+                                });
+                              }
+                            },
+                            child: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[900],
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            );
-                            if (result != null) {
-                              setState(() {
-                                categoryName = result['name'];
-                                selectedCategoryIcon = result['icon'];
-                              });
-                            }
-                          },
-                          child: Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[900],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.add,
-                                size: 30,
-                                color: Colors.orange,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Colors.orange,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
               ),
             ),
             // Nút xác nhận
@@ -271,8 +302,9 @@ class _InputScreenState extends State<InputScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: Text(
-                    selectedType == 'Chi' ? 'Nhập khoản chi' : 'Nhập khoản thu',
-                    style: const TextStyle(fontSize: 16, color: Colors.black)),
+                  selectedType == 'Chi' ? 'Nhập khoản chi' : 'Nhập khoản thu',
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                ),
               ),
             ),
           ],

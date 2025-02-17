@@ -25,9 +25,9 @@ class AuthService {
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      String userId = responseData['user']['id'] ?? ''; // Cung cấp giá trị mặc định nếu userId là null
-      String userEmail = responseData['user']['email'] ?? 'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
-      String userUsername = responseData['user']['username'] ?? 'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
+      String userId = responseData['user']['id'] ?? ''; 
+      String userEmail = responseData['user']['email'] ?? 'Unknown Email'; 
+      String userUsername = responseData['user']['username'] ?? 'Unknown Username'; 
       currentUser = User(
         id: userId,
         email: userEmail,
