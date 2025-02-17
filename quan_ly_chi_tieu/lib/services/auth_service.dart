@@ -4,10 +4,11 @@ import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
   // duong
-  final String baseUrl = 'http://192.168.102.17:3000/auth';
+  final String baseUrl = 'http://10.6.136.124:3000/auth';
 
   // viet
   // final String baseUrl = 'http://192.168.1.3:3000/auth';
+
   static User? currentUser; // Thông tin người dùng hiện tại
 
   Future<void> login(String email, String password) async {
@@ -18,8 +19,6 @@ class AuthService {
       },
       body: jsonEncode({'email': email, 'password': password}),
     );
-
-    print('Response: ${response.body}'); // In ra nội dung phản hồi để kiểm tra
 
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
@@ -65,19 +64,10 @@ class AuthService {
     } else {
       try {
         final responseData = jsonDecode(response.body);
-        if (responseData == null || responseData['user'] == null) {
-          throw Exception('User data is null');
-        }
-        currentUser = User.fromJson(responseData['user']); // Lưu trữ thông tin người dùng sau khi đăng ký thành công
-      } else {
-        final responseBody = response.body; // Lưu trữ nội dung phản hồi
-        final responseData = jsonDecode(responseBody);
-        print('Error: ${responseData['message']}'); // Ghi lại lỗi để kiểm tra
         throw Exception(responseData['message']);
+      } catch (e) {
+        throw Exception('Failed to register');
       }
-    } catch (e) {
-      print('Error: Failed to register. Exception: $e'); // In ra lỗi chi tiết để kiểm tra
-      throw Exception('Failed to register. Exception: $e');
     }
   }
 
@@ -126,8 +116,7 @@ class AuthService {
     );
 
     if (response.statusCode == 200) {
-      currentUser =
-          null; // Xóa thông tin người dùng sau khi đăng xuất thành công
+      currentUser = null; // Xóa thông tin người dùng sau khi đăng xuất thành công
     } else {
       try {
         final responseBody = response.body;
@@ -135,8 +124,7 @@ class AuthService {
           throw Exception('Server returned an HTML response');
         }
         final responseData = jsonDecode(response.body);
-        throw Exception(
-            'Failed to logout: ${responseData['message']} - Response: $responseBody');
+        throw Exception('Failed to logout: ${responseData['message']} - Response: $responseBody');
       } catch (e) {
         throw Exception('Failed to logout: $e');
       }
