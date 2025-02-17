@@ -3,7 +3,7 @@ import 'package:quan_ly_chi_tieu/services/auth_service.dart'; // Import AuthServ
 import 'package:quan_ly_chi_tieu/models/user.dart'; // Import User model
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -105,8 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         trailing: _isEditing
             ? CupertinoButton(
                 padding: EdgeInsets.zero,
-                child: const Text('Lưu'),
                 onPressed: _saveUserData,
+                child: const Text('Lưu'),
               )
             : CupertinoButton(
                 padding: EdgeInsets.zero,

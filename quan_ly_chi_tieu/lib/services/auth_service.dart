@@ -3,11 +3,7 @@ import 'dart:convert';
 import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
-  // duong
-  final String baseUrl = 'http://192.168.102.17:3000/auth';
-
-  // viet
-  // final String baseUrl = 'http://192.168.1.3:3000/auth';
+  final String baseUrl = 'http://10.6.136.124:3000/auth'; // Cập nhật URL của máy chủ
   static User? currentUser; // Thông tin người dùng hiện tại
 
   Future<void> login(String email, String password) async {
@@ -19,17 +15,14 @@ class AuthService {
       body: jsonEncode({'email': email, 'password': password}),
     );
 
+    print('Response: ${response.body}'); // In ra nội dung phản hồi để kiểm tra
+
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      String userId = responseData['user']['id'] ?? ''; // Cung cấp giá trị mặc định nếu userId là null
-      String userEmail = responseData['user']['email'] ?? 'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
-      String userUsername = responseData['user']['username'] ?? 'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
-      currentUser = User(
-        id: userId,
-        email: userEmail,
-        username: userUsername,
-        password: password,
-      ); // Lưu trữ thông tin người dùng sau khi đăng nhập thành công
+      if (responseData == null || responseData['user'] == null) {
+        throw Exception('User data is null');
+      }
+      currentUser = User.fromJson(responseData['user']); // Lưu trữ thông tin người dùng sau khi đăng nhập thành công
     } else {
       try {
         final responseData = jsonDecode(response.body);
@@ -41,32 +34,32 @@ class AuthService {
   }
 
   Future<void> register(String email, String password, String username) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/register'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode({'email': email, 'password': password, 'username': username}),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/register'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({'email': email, 'password': password, 'username': username}),
+      );
 
-    if (response.statusCode == 201) {
-      final responseData = jsonDecode(response.body);
-      String userId = responseData['user']['id'] ?? ''; // Cung cấp giá trị mặc định nếu userId là null
-      String userEmail = responseData['user']['email'] ?? 'Unknown Email'; // Cung cấp giá trị mặc định nếu email là null
-      String userUsername = responseData['user']['username'] ?? 'Unknown Username'; // Cung cấp giá trị mặc định nếu username là null
-      currentUser = User(
-        id: userId,
-        email: userEmail,
-        username: userUsername,
-        password: password,
-      ); // Lưu trữ thông tin người dùng sau khi đăng ký thành công
-    } else {
-      try {
+      print('Response: ${response.body}'); // In ra nội dung phản hồi để kiểm tra
+
+      if (response.statusCode == 201) {
         final responseData = jsonDecode(response.body);
+        if (responseData == null || responseData['user'] == null) {
+          throw Exception('User data is null');
+        }
+        currentUser = User.fromJson(responseData['user']); // Lưu trữ thông tin người dùng sau khi đăng ký thành công
+      } else {
+        final responseBody = response.body; // Lưu trữ nội dung phản hồi
+        final responseData = jsonDecode(responseBody);
+        print('Error: ${responseData['message']}'); // Ghi lại lỗi để kiểm tra
         throw Exception(responseData['message']);
-      } catch (e) {
-        throw Exception('Failed to register');
       }
+    } catch (e) {
+      print('Error: Failed to register. Exception: $e'); // In ra lỗi chi tiết để kiểm tra
+      throw Exception('Failed to register. Exception: $e');
     }
   }
 

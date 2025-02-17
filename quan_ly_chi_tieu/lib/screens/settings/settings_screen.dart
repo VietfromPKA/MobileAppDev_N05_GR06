@@ -5,7 +5,7 @@ import 'package:quan_ly_chi_tieu/screens/settings/profile_screen.dart'; // Impor
 import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart';  // Import trang login
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   void _showLogoutConfirmation(BuildContext context) {
     showCupertinoDialog(

@@ -5,7 +5,7 @@ import 'package:quan_ly_chi_tieu/widgets/add_expense_form.dart';
 class EditExpenseForm extends StatelessWidget {
   final Expense expense;
 
-  const EditExpenseForm({Key? key, required this.expense}) : super(key: key);
+  const EditExpenseForm({super.key, required this.expense});
 
   @override
   Widget build(BuildContext context) {

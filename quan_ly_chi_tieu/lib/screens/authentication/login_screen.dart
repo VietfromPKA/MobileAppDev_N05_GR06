@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/register_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/forgot_password_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';

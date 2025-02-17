@@ -12,8 +12,8 @@ const UserSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    unique: true, // Đảm bảo rằng username là unique
-    default: null, // Thêm giá trị mặc định nếu cần thiết
+    unique: true, 
+    default: null, 
   },
 });
 
