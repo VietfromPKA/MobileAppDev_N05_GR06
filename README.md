@@ -33,20 +33,20 @@ Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
 
 ## Danh sách các màn hình
 <p float = "left">
-  <img src="quan_ly_chi_tieu/assets/images/DangKy.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/DangNhap.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/QuenMatKhau.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/Chitieu.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/Themchitieu.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/Thongke.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/Lich.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/chitietgiaodich.png" width="300">
-  <img src="quan_ly_chi_tieu/assets/images/caidat.png" width="300">
+  <img src="quan_ly_chi_tieu/assets/images/DangKy.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/DangNhap.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/QuenMatKhau.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Chitieu.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Themchitieu.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Thongke.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/Lich.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/chitietgiaodich.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/caidat.png" width="200">
 
-Class Diagram
+## Class Diagram
 ![Class Diagram](qly_chi_tieu/assets/images/UML.drawio.png)
 
-Demo sơ đồ Use-case:
+## Demo sơ đồ Use-case:
 ![Sơ đồ UC](qly_chi_tieu/assets/images/UC.drawio.png)
 </p>
 
