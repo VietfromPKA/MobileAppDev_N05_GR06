@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
-  final String baseUrl = 'http://192.168.102.17:3000'; // Cập nhật baseUrl chung
+  // duong
+  final String baseUrl = 'http://10.6.136.124:3000/auth';
+
+  // viet
+  // final String baseUrl = 'http://192.168.1.3:3000/auth';
 
   static User? currentUser; // Thông tin người dùng hiện tại
 
