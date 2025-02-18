@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/login_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
 import 'package:quan_ly_chi_tieu/providers/expense_provider.dart';
+import 'package:quan_ly_chi_tieu/providers/user_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ExpenseProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ExpenseProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+      ],
       child: CupertinoApp(
         debugShowCheckedModeBanner: false, // Tắt chữ "DEBUG"
         theme: const CupertinoThemeData(
