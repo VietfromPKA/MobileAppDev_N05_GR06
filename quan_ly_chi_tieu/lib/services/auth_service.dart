@@ -7,7 +7,7 @@ class AuthService {
   final String baseUrl = 'http://10.6.136.126:3000/auth';
 
   // duong
-  // final String baseUrl = 'http://10.6.136.126/auth';
+  final String baseUrl = 'http://10.6.136.124:3000/auth';
 
   // viet
   // final String baseUrl = 'http://192.168.1.3:3000/auth';
@@ -16,7 +16,7 @@ class AuthService {
 
   Future<void> login(String email, String password) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/login'),
+      Uri.parse('$baseUrl/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -35,6 +35,7 @@ class AuthService {
         username: userUsername,
         password: password,
       ); // Lưu trữ thông tin người dùng sau khi đăng nhập thành công
+      await getUserData(); // Gọi getUserData để chắc chắn rằng thông tin người dùng được tải
     } else {
       try {
         final responseData = jsonDecode(response.body);
@@ -47,7 +48,7 @@ class AuthService {
 
   Future<void> register(String email, String password, String username) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/register'),
+      Uri.parse('$baseUrl/auth/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -69,6 +70,7 @@ class AuthService {
         username: userUsername,
         password: password,
       ); // Lưu trữ thông tin người dùng sau khi đăng ký thành công
+      await getUserData(); // Gọi getUserData để chắc chắn rằng thông tin người dùng được tải
     } else {
       try {
         final responseData = jsonDecode(response.body);
@@ -79,30 +81,30 @@ class AuthService {
     }
   }
 
-  Future<void> updateUser(User user) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl/users/${user.id}'),
+  Future<void> getUserData() async {
+    final response = await http.get(
+      Uri.parse(
+          '$baseUrl/user/${currentUser?.id}'), // Endpoint để lấy thông tin người dùng
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(user.toJson()),
     );
 
     if (response.statusCode == 200) {
-      currentUser = user; // Cập nhật thông tin người dùng hiện tại
-    } else {
-      try {
-        final responseData = jsonDecode(response.body);
-        throw Exception(responseData['message']);
-      } catch (e) {
-        throw Exception('Failed to update user');
+      final responseData = jsonDecode(response.body);
+      if (responseData['user'] == null) {
+        throw Exception('No user data found');
       }
+      currentUser =
+          User.fromJson(responseData['user']); // Lưu trữ thông tin người dùng
+    } else {
+      throw Exception('Failed to fetch user data');
     }
   }
 
   Future<void> forgotPassword(String email) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/forgot-password'),
+      Uri.parse('$baseUrl/auth/forgot-password'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -116,7 +118,7 @@ class AuthService {
 
   Future<void> logout() async {
     final response = await http.post(
-      Uri.parse('$baseUrl/logout'),
+      Uri.parse('$baseUrl/auth/logout'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
