@@ -45,10 +45,18 @@ Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
   <img src="quan_ly_chi_tieu/assets/images/caidat.png" width="200">
 
 ## Class Diagram
-![Class Diagram](qly_chi_tieu/assets/images/UML.drawio.png)
+![Class Diagram](quan_ly_chi_tieu/assets/images/UML-Mobile.png)
 
 ## Demo sơ đồ Use-case:
-![Sơ đồ UC](qly_chi_tieu/assets/images/UC.drawio.png)
+![Sơ đồ UC](quan_ly_chi_tieu/assets/images/Use-case-Mobile.png)
+
+<!-- Giải thích sơ đồ Diagram -->
+<!-- User → Expense: Một User có nhiều Expense (1-N). Một Expense thuộc về duy nhất một User (1-1) -->
+<!-- ExpenseProvider → APIService: ExpenseProvider gọi APIService để lấy dữ liệu và chỉ sử dụng nó khi cần. -->
+<!-- APIService → AuthService: APIService cần AuthService để xác thực người dùng trước khi gọi API. -->
+<!-- UserProvider → AuthService: UserProvider lưu trạng thái đăng nhập, gọi AuthService để xác thực. -->
+<!-- Widgets → Provider: Widgets như ExpenseList, ExpenseCard, AddExpenseForm chỉ lấy dữ liệu từ các Provider. -->
+
 </p>
 
 
