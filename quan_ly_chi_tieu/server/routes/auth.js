@@ -23,11 +23,6 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
-    if (!username) {
-      console.error('Username is required');
-      return res.status(400).json({ message: 'Username is required' });
-    }
-
     user = new User({
       email,
       password: await bcrypt.hash(password, 10),
@@ -37,13 +32,13 @@ router.post('/register', async (req, res) => {
     await user.save();
     console.log('User saved:', user);
 
-    res.status(201).json({ 
-      message: 'Registration successful', 
-      user: { 
-        id: user._id, 
-        email: user.email, 
-        username: user.username 
-      } 
+    res.status(201).json({
+      message: 'Registration successful',
+      user: {
+        _id: user._id.toString(),
+        email: user.email,
+        username: user.username,
+      },
     });
   } catch (error) {
     console.error('Error during registration:', error);

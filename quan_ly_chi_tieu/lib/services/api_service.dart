@@ -7,7 +7,7 @@ class ApiService {
   // Your API URL  -  CHANGE THIS!
 
   // Duong
-  final String baseUrl = 'http://192.168.102.17:3000';
+  final String baseUrl = 'http://10.6.136.171:3000';
 
   // // Viet
   // final String baseUrl = 'http://192.168.1.3:3000';
