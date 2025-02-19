@@ -38,6 +38,7 @@ Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
   <img src="quan_ly_chi_tieu/assets/images/QuenMatKhau.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Chitieu.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Themchitieu.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/chinhsuagiaodich.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Thongke.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Lich.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/chitietgiaodich.png" width="200">
