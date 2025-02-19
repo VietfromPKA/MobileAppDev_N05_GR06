@@ -14,8 +14,8 @@ class ApiService {
   // // Viet
   // final String baseUrl = 'http://192.168.1.3:3000';
 
-  final String baseUrl =
-      'http://10.6.96.148:3000'; 
+  // final String baseUrl =
+  //     'http://10.6.136.171:3000'; 
   Future<List<Expense>> getAllExpenses() async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/expenses'));

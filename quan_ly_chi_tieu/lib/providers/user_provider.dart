@@ -9,21 +9,24 @@ class UserProvider with ChangeNotifier {
   User? get currentUser => _currentUser;
 
   Future<void> login(String email, String password) async {
-    await _authService.login(email, password);
-    _currentUser = AuthService.currentUser;
+    _currentUser = await _authService.login(email, password);
     notifyListeners();
   }
 
   Future<void> register(String email, String password, String username) async {
-    await _authService.register(email, password, username);
-    _currentUser = AuthService.currentUser;
+    _currentUser = await _authService.register(email, password, username);
     notifyListeners();
   }
 
   Future<void> getUserData() async {
-    await _authService.getUserData();
-    _currentUser = AuthService.currentUser;
-    notifyListeners();
+    try {
+      await _authService.getUserData();
+      _currentUser = AuthService.currentUser;
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi getUserData: $e');
+      rethrow;
+    }
   }
 
   Future<void> logout() async {
