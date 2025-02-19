@@ -9,7 +9,7 @@ class ApiService {
   final String baseUrl = 'http://10.6.136.126:3000';
 
   // Duong
-  final String baseUrl = 'http://192.168.102.17:3000';
+  // final String baseUrl = 'http://192.168.102.17:3000';
 
   // // Viet
   // final String baseUrl = 'http://192.168.1.3:3000';
