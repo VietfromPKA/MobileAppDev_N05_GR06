@@ -28,35 +28,33 @@ class ExpenseCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
           boxShadow: [
             BoxShadow(
-              color: CupertinoColors.systemGrey.withOpacity(0.2),
-              spreadRadius: 1,
-              blurRadius: 4,
-              offset: const Offset(0, 2),
+              color: CupertinoColors.systemGrey.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 6,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
-                  // Use consistent colors based on expense.type
                   color: expense.type == 'Thu nhập'
-                      ? CupertinoColors.activeGreen.withOpacity(0.2)
-                      : CupertinoColors.systemRed.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(10.0),
+                      ? CupertinoColors.activeGreen.withOpacity(0.1)
+                      : CupertinoColors.systemRed.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Icon(
-                  // Use consistent icons based on expense.type
                   expense.type == 'Thu nhập'
                       ? CupertinoIcons.arrow_down_circle_fill
                       : CupertinoIcons.arrow_up_circle_fill,
                   color: expense.type == 'Thu nhập'
                       ? CupertinoColors.activeGreen
                       : CupertinoColors.systemRed,
-                  size: 24,
+                  size: 28,
                 ),
               ),
               const SizedBox(width: 16),
@@ -68,16 +66,17 @@ class ExpenseCard extends StatelessWidget {
                       expense.title,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
+                        fontSize: 18.0,
                       ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
+                    const SizedBox(height: 4),
                     Text(
-                      // Use NumberFormat and display type
                       '${NumberFormat("#,##0", "vi_VN").format(expense.amount.abs())} VNĐ - ${expense.category}',
                       style: TextStyle(
                         color: CupertinoColors.systemGrey,
+                        fontSize: 14.0,
                       ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -92,15 +91,20 @@ class ExpenseCard extends StatelessWidget {
                 children: [
                   Text(
                     '${expense.date.day}/${expense.date.month}/${expense.date.year}',
-                    style: TextStyle(color: CupertinoColors.systemGrey),
+                    style: TextStyle(
+                      color: CupertinoColors.systemGrey,
+                      fontSize: 14.0,
+                    ),
                   ),
+                  const SizedBox(height: 4),
                   Text(
-                    expense.type, // Display "Thu nhập" or "Chi tiêu"
+                    expense.type,
                     style: TextStyle(
                       color: expense.type == 'Thu nhập'
-                          ? CupertinoColors.activeGreen // Green for income
-                          : CupertinoColors.systemRed, // Red for expense
+                          ? CupertinoColors.activeGreen
+                          : CupertinoColors.systemRed,
                       fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
                     ),
                   ),
                 ],
@@ -112,7 +116,7 @@ class ExpenseCard extends StatelessWidget {
                   _showDeleteConfirmationDialog(context);
                 },
                 child: const Icon(CupertinoIcons.delete,
-                    color: CupertinoColors.systemRed),
+                    color: CupertinoColors.systemRed, size: 28),
               ),
             ],
           ),
@@ -121,7 +125,7 @@ class ExpenseCard extends StatelessWidget {
     );
   }
 
-    Future<void> _showDeleteConfirmationDialog(BuildContext context) async {
+  Future<void> _showDeleteConfirmationDialog(BuildContext context) async {
     return showCupertinoDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -136,17 +140,15 @@ class ExpenseCard extends StatelessWidget {
               },
             ),
             CupertinoDialogAction(
-              isDestructiveAction: true, // Make the delete button red
+              isDestructiveAction: true,
               child: const Text('Xóa'),
               onPressed: () async {
-                Navigator.of(context).pop(); // Close the dialog first
+                Navigator.of(context).pop();
                 try {
                   await Provider.of<ExpenseProvider>(context, listen: false)
                       .deleteExpense(expense);
                 } catch (error) {
-                  // Show an error message using CupertinoAlertDialog
                   _showErrorDialog(context, 'Xóa giao dịch không thành công: ${error.toString()}');
-
                 }
               },
             ),
@@ -155,7 +157,8 @@ class ExpenseCard extends StatelessWidget {
       },
     );
   }
-    void _showErrorDialog(BuildContext context, String message) {
+
+  void _showErrorDialog(BuildContext context, String message) {
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
