@@ -10,7 +10,7 @@ class AuthService {
   //final String baseUrl = 'http://192.168.1.3:3000/auth';
 
   //phenikaa
-  final String baseUrl = 'http://10.6.136.186:3000/auth';
+  final String baseUrl = 'http://10.6.96.148:3000/auth';
 
   static User? currentUser; // Thông tin người dùng hiện tại
 
