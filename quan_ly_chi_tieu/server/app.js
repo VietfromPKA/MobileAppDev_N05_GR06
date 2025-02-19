@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const expensesRouter = require('./routes/expenses');
 const authRouter = require('./routes/auth'); // Import routes from auth.js
+const userRouter = require('./routes/user'); // Import routes from user.js
 const config = require('./config');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/expenses', expensesRouter);
 app.use('/auth', authRouter); // Use auth routes
+app.use('/user', userRouter); // Use user routes
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

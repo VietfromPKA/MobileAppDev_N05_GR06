@@ -36,7 +36,8 @@ class StatisticsScreen extends StatelessWidget {
         color: color,
         value: entry.value.abs(),
         title: '',  // REMOVE title from the section itself
-        radius: 150, // bán kính biểu đồ
+        radius: 80, // Adjust radius as needed, smaller for more space
+        // titleStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: CupertinoColors.white), // No title style needed
         showTitle: false, // Hide the title *inside* the pie chart
       );
     }).toList();

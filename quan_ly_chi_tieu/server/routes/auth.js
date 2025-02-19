@@ -11,7 +11,6 @@ router.use(bodyParser.json());
 
 // Kết nối đến cơ sở dữ liệu chung
 mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
 router.post('/register', async (req, res) => {

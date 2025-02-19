@@ -5,24 +5,21 @@ import 'package:flutter/foundation.dart'; // Import for kDebugMode
 
 class ApiService {
   // Your API URL  -  CHANGE THIS!
+  // Quoc
+  final String baseUrl = 'http://10.6.136.126:3000';
 
   // Duong
   // final String baseUrl =
   //     'http://192.168.102.17:3000'; 
 
   // // Viet
-  // final String baseUrl =
-  //     'http://192.168.1.3:3000';
+  // final String baseUrl = 'http://192.168.1.3:3000';
 
   final String baseUrl =
       'http://10.6.96.148:3000'; 
   Future<List<Expense>> getAllExpenses() async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/expenses'));
-      _debugPrint("getAllExpenses: URL: $baseUrl/expenses"); // Debug
-      _debugPrint(
-          "getAllExpenses: Status Code: ${response.statusCode}"); // Debug
-      _debugPrint("getAllExpenses: Response Body: ${response.body}"); // Debug
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);
@@ -38,11 +35,6 @@ class ApiService {
 
   Future<Expense> addExpense(Expense expense) async {
     try {
-      _debugPrint("addExpense: URL: $baseUrl/expenses");
-      _debugPrint("addExpense: Headers: ${<String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      }}");
-      _debugPrint("addExpense: Request Body: ${jsonEncode(expense.toMap())}");
       final response = await http.post(
         Uri.parse('$baseUrl/expenses'),
         headers: <String, String>{
@@ -50,9 +42,6 @@ class ApiService {
         },
         body: jsonEncode(expense.toMap()),
       );
-
-      _debugPrint("addExpense: Status Code: ${response.statusCode}");
-      _debugPrint("addExpense: Response Body: ${response.body}");
 
       if (response.statusCode == 201) {
         return Expense.fromMap(jsonDecode(response.body));
