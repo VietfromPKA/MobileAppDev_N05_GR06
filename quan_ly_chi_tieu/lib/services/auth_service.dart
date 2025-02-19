@@ -13,7 +13,7 @@ class AuthService {
   //final String baseUrl = 'http://192.168.1.3:3000/auth';
 
   //phenikaa
-  final String baseUrl = 'http://10.6.96.148:3000/auth';
+  final String baseUrl = 'http://10.6.96.148:3000';
 
   static User? currentUser; // Thông tin người dùng hiện tại
 
@@ -38,7 +38,7 @@ class AuthService {
         username: userUsername,
         password: password,
       ); // Lưu trữ thông tin người dùng sau khi đăng nhập thành công
-      await getUserData(); // Gọi getUserData để chắc chắn rằng thông tin người dùng được tải
+      //await getUserData(); // Gọi getUserData để chắc chắn rằng thông tin người dùng được tải
     } else {
       try {
         final responseData = jsonDecode(response.body);
@@ -73,7 +73,7 @@ class AuthService {
         username: userUsername,
         password: password,
       ); // Lưu trữ thông tin người dùng sau khi đăng ký thành công
-      await getUserData(); // Gọi getUserData để chắc chắn rằng thông tin người dùng được tải
+      //await getUserData(); // Gọi getUserData để chắc chắn rằng thông tin người dùng được tải
     } else {
       try {
         final responseData = jsonDecode(response.body);
@@ -87,7 +87,7 @@ class AuthService {
   Future<void> getUserData() async {
     final response = await http.get(
       Uri.parse(
-          '$baseUrl/user/${currentUser?.id}'), // Endpoint để lấy thông tin người dùng
+          '$baseUrl/models/user/${currentUser?.id}'), // Endpoint để lấy thông tin người dùng
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
