@@ -4,7 +4,7 @@ import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
   // Quoc
-  final String baseUrl = 'http://10.6.136.126:3000/auth';
+  //final String baseUrl = 'http://10.6.136.126:3000/auth';
 
   // duong
   // final String baseUrl = 'http://10.6.136.124:3000/auth';
