@@ -9,14 +9,12 @@ class ApiService {
   //final String baseUrl = 'http://10.6.136.126:3000';
 
   // Duong
-  // final String baseUrl =
-  //     'http://192.168.102.17:3000'; 
+  final String baseUrl = 'http://10.60.22.36:3000';
 
   // // Viet
   // final String baseUrl = 'http://192.168.1.3:3000';
 
-  final String baseUrl =
-      'http://10.6.96.148:3000'; 
+ 
   Future<List<Expense>> getAllExpenses() async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/expenses'));
