@@ -45,7 +45,7 @@ Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
   <img src="quan_ly_chi_tieu/assets/images/caidat.png" width="200">
 
 ## Class Diagram
-![Class Diagram](quan_ly_chi_tieu/assets/images/UML-Mobile.png)
+![Class Diagram](quan_ly_chi_tieu/assets/images/UML1.png)
 
 ## Demo sơ đồ Use-case:
 ![Sơ đồ UC](quan_ly_chi_tieu/assets/images/Use-case-Mobile.png)

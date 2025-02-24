@@ -13,19 +13,18 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'] ?? '', // Provide a default value if id is null
-      email: json['email'] ?? 'Unknown Email', // Provide a default value if email is null
-      username: json['username'] ?? 'Unknown Username', // Provide a default value if username is null
-      password: json['password'] ?? '', // Provide a default value if password is null
+      id: json['_id'] ?? '', // Sử dụng _id
+      email: json['email'] ?? 'Unknown Email',
+      username: json['username'] ?? 'Unknown Username',
+      password: '', // Password không nên được lưu trữ trên client
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      '_id': id, // Sử dụng _id
       'email': email,
       'username': username,
-      'password': password,
     };
   }
 }

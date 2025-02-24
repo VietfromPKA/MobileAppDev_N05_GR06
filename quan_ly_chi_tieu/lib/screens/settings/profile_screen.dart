@@ -28,6 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (userData != null) {
         _usernameController.text = userData.username;
         _emailController.text = userData.email;
+      } else {
+        _showErrorDialog('Không tìm thấy thông tin người dùng.');
       }
     } catch (e) {
       _showErrorDialog('Lỗi tải thông tin người dùng: $e');

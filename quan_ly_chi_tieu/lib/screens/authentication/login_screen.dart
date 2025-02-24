@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/register_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/authentication/forgot_password_screen.dart';
 import 'package:quan_ly_chi_tieu/screens/home_screen.dart';
+import 'package:quan_ly_chi_tieu/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +17,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   bool _obscureText = true;
+
+  String? _emailError;
+  String? _passwordError;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo
                   Image.asset(
                     'assets/images/logo.png',
                     height: 250,
                   ),
                   const SizedBox(height: 32),
-                  // Tiêu đề
                   const Text(
                     'Chào mừng bạn trở lại! ',
                     style: TextStyle(
@@ -60,7 +62,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  // Email Field
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -89,10 +90,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        if (value.isEmpty) {
+                          setState(() {
+                            _emailError = 'Vui lòng nhập email';
+                          });
+                        } else {
+                          setState(() {
+                            _emailError = null;
+                          });
+                        }
+                      },
                     ),
                   ),
+                  if (_emailError != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        _emailError!,
+                        style: const TextStyle(color: CupertinoColors.destructiveRed),
+                      ),
+                    ),
                   const SizedBox(height: 16),
-                  // Password Field
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -135,10 +154,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         border: Border.all(color: CupertinoColors.systemGrey4),
                         borderRadius: BorderRadius.circular(12),
                       ),
+                      onChanged: (value) {
+                        if (value.isEmpty) {
+                          setState(() {
+                            _passwordError = 'Vui lòng nhập mật khẩu';
+                          });
+                        } else {
+                          setState(() {
+                            _passwordError = null;
+                          });
+                        }
+                      },
                     ),
                   ),
+                  if (_passwordError != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        _passwordError!,
+                        style: const TextStyle(color: CupertinoColors.destructiveRed),
+                      ),
+                    ),
                   const SizedBox(height: 24),
-                  // Forgot Password
                   Align(
                     alignment: Alignment.centerRight,
                     child: CupertinoButton(
@@ -158,7 +195,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Login Button
                   SizedBox(
                     width: double.infinity,
                     child: CupertinoButton.filled(
@@ -172,13 +208,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                       onPressed: () async {
-                        if (_formKey.currentState?.validate() ?? false) {
+                        if (_emailError == null && _passwordError == null && _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
                           setState(() {
                             _isLoading = true;
                           });
                           try {
-                            // Simulate login process
-                            await Future.delayed(const Duration(seconds: 2));
+                            await AuthService().login(
+                              _emailController.text,
+                              _passwordController.text,
+                            );
                             Navigator.pushReplacement(
                               context,
                               CupertinoPageRoute(
@@ -197,7 +235,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Sign Up Section
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -231,7 +268,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Hiển thị dialog thông báo lỗi
   void _showErrorDialog(BuildContext context, String errorMessage) {
     showCupertinoDialog(
       context: context,
