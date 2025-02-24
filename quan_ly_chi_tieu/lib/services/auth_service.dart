@@ -3,23 +3,17 @@ import 'dart:convert';
 import 'package:quan_ly_chi_tieu/models/user.dart';
 
 class AuthService {
-  final String baseUrl = 'http://192.168.102.17:3000/auth'; // Thay đổi địa chỉ IP nếu cần
+  final String baseUrl = 'http://10.60.22.36:3000/auth'; // Thay đổi địa chỉ IP nếu cần
 
-  static User? currentUser;
 
-<<<<<<< HEAD
   // viet
   //final String baseUrl = 'http://192.168.1.3:3000/auth';
 
   //phenikaa
-  final String baseUrl = 'http://172.29.96.1:3000';
 
   static User? currentUser; // Thông tin người dùng hiện tại
 
-  Future<void> login(String email, String password) async {
-=======
   Future<User> login(String email, String password) async {
->>>>>>> d7709400bac864fd4c8554d025315893288dc4ee
     final response = await http.post(
       Uri.parse('$baseUrl/login'),
       headers: <String, String>{
