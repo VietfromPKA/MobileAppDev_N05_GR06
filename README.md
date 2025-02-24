@@ -39,12 +39,13 @@ Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
   <img src="quan_ly_chi_tieu/assets/images/QuenMatKhau.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Chitieu.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Themchitieu.png" width="200">
+  <img src="quan_ly_chi_tieu/assets/images/manchinhsua.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/chinhsuagiaodich.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Thongke.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/Lich.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/chitietgiaodich.png" width="200">
   <img src="quan_ly_chi_tieu/assets/images/caidat.png" width="200">
-  <img src="quan_ly_chi_tieu/assets/images/manchinhsua.png" width="200">
+  
 
 ## Class Diagram
 ![Class Diagram](quan_ly_chi_tieu/assets/images/UML1.png)
@@ -90,7 +91,7 @@ Xây dựng phần mềm quản lý chi tiêu cá nhân trên di động
   node app.js
   flutter run
   ```
-4. Mở ứng dụng trên trình giả lập hoặc thiết bị thật
+5. Mở ứng dụng trên trình giả lập hoặc thiết bị thật
 
 ## 📖 Hướng dẫn sử dụng
 1. Đăng nhập hoặc đăng ký tài khoản 
